@@ -3,7 +3,7 @@ import commonjs from 'rollup-plugin-commonjs'
 export default {
     input : "./src/index.js",
     output : {
-        file : './dist/echarts.config.js',
+        file : './dist/echarts.config.umd.js',
         format : 'umd',
         name : 'echartsConfig'
     },

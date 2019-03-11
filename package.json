@@ -4,8 +4,8 @@
   "description": "talkingdata echart config",
   "main": "index.js",
   "scripts": {
-    "build:iife": "rollup --config rollup.config.iife.js",
-    "build:umd": "rollup --config rollup.config.umd.js"
+    "build": "rollup --config ./build/rollup.config.js",
+    "build:umd": "rollup --config ./build/rollup.config.umd.js"
   },
   "author": "mo.duan@tendcloud.com",
   "license": "ISC",

@@ -65,7 +65,9 @@ const chartMerge = function(baseInfo = {},config = {}){
         returnConfig.color = deepCopy( colorConfig.COLORS );
     }
     //fill legend
-    returnConfig.legend.data = getLegend( baseInfo.chartType,returnConfig );
+    if( returnConfig.legend ){
+        returnConfig.legend.data = getLegend( baseInfo.chartType,returnConfig );
+    }
 
     return returnConfig;
 }

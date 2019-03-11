@@ -1,6 +1,6 @@
 export const getLegend = function(type,config){
     const legend = [];
-    if( config.legend.data.length === 0 ){
+    if( config.legend && config.legend.data.length === 0 ){
         
         if( type === 'Pie' ){
             config.series.forEach((it)=>{

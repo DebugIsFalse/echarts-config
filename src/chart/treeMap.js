@@ -2,7 +2,22 @@ import colorConfig from '../config/color';
 export  const TreeMap = {
     series : {
         name: 'brand',
+        label : {
+            rich : {
+                name : {
+                    color : "#fff",
+                    fontSize : 12,
+                },
+                des : {
+                    color : "#fff",
+                    height : 30,
+                    padding : [10,0,0,14],
+                    fontSize : 20
+                }
+            }
+        },
         type: 'treemap',
+        fontFamily : 'Roboto-Regular',
         leafDepth: 1,
         roam: false,
         width: '100%',
@@ -53,9 +68,11 @@ export  const TreeMap = {
         ],
         breadcrumb: {
             height: 25,
+            bottom : 10,
             itemStyle: {
                 normal: {
-                    borderWidth: 0
+                    borderWidth: 0,
+                    color : colorConfig.TREEMAPBREADCOLOR
                 }
             }
         }
