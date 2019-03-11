@@ -1,0 +1,17 @@
+{
+  "name": "td-chart-config",
+  "version": "0.0.1",
+  "description": "talkingdata echart config",
+  "main": "index.js",
+  "scripts": {
+    "build:iife": "rollup --config rollup.config.iife.js",
+    "build:umd": "rollup --config rollup.config.umd.js"
+  },
+  "author": "mo.duan@tendcloud.com",
+  "license": "ISC",
+  "devDependencies": {
+    "deepmerge": "^3.2.0",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-node-resolve": "^4.0.1"
+  }
+}

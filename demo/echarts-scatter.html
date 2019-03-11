@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang='zh-CN'>
+<head>
+<title>散点图</title>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width'>
+<style>
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-size: 12px;
+    padding: 50px;
+    background: #06183e
+}
+
+.echarts-line{
+    width: 500px;
+    height: 300px;
+    background: #052153;
+    margin-bottom: 30px;
+}
+</style>
+</head>
+<body>
+    <div class="echarts-line echarts-line1"></div>
+    <script type="text/javascript" src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
+    <script src="../build/td.echarts.config.js"></script>
+    <script>
+        const { chartMerge,insertChartConfig,resetColorConfig } = echartsConfig;
+
+        //echarts1
+        const echarts1 = chartMerge({ chartType : 'Scatter' },{
+            series : [
+            {
+                    name: '预算',
+                    symbolSize : 5,
+                    data : [
+                        [10.0, 8.04],
+                        [8.0, 6.95],
+                        [13.0, 7.58],
+                        [9.0, 8.81],
+                        [11.0, 8.33],
+                        [14.0, 9.96],
+                        [6.0, 7.24],
+                        [4.0, 4.26],
+                        [12.0, 10.84],
+                        [7.0, 4.82],
+                        [5.0, 5.68]
+                    ]
+                },
+                {
+                    name: '开销',
+                    symbolSize : 10,
+                    data : [
+                        [4, 8.04],
+                        [20, 6.95],
+                        [33.0, 7.58],
+                        [2.0, 8.81],
+                        [3, 8.33],
+                        [1.0, 9.96],
+                        [6.0, 7.24],
+                        [4.0, 4.26],
+                        [12.0, 10.84],
+                        [7.0, 4.82],
+                        [5.0, 5.68]
+                    ]
+                }
+            ]
+        });
+        const echarts1Elem = window.echarts.init( document.querySelector('.echarts-line1') );
+        echarts1Elem.setOption( echarts1 );
+
+    </script>
+</body>
+</html>
