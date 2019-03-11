@@ -1,0 +1,2 @@
+# echarts-config
+规范标准echarts初始化配置使用，让业务和公司的charts组件统一标准和色阶
