@@ -1,0 +1,29 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-size: 12px;
+    padding: 50px;
+    background: #06183e
+}
+
+.echarts-line{
+    width: 500px;
+    height: 300px;
+    background: #052153;
+    margin-bottom: 30px;
+}
+.theme-button{
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background: rgb(0, 207, 127);
+    color: #fff;
+    font-size: 12px;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    line-height: 30px;
+    text-align: center;
+}

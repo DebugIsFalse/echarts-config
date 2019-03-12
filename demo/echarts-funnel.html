@@ -4,31 +4,16 @@
 <title>漏斗图</title>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width'>
-<style>
-*{
-    padding: 0;
-    margin: 0;
-}
-body{
-    font-size: 12px;
-    padding: 50px;
-    background: #06183e
-}
-
-.echarts-line{
-    width: 500px;
-    padding: 20px;
-    height: 500px;
-    background: #052153;
-    margin-bottom: 30px;
-}
-</style>
+<link href="./css/css.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="echarts-line echarts-line1"></div>
+<div class="echarts-line echarts-line2"></div>
+<div class="theme-button">dark</div>
 <script type="text/javascript" src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
 <script src="../dist/echarts.config.js"></script>
+<script src="./js/changeTheme.js"></script>
 <script>
 const {
     chartMerge,
@@ -36,54 +21,132 @@ const {
     resetColorConfig
 } = echartsConfig;
 
-//初始化设置主题 dark light
-window._CHART_THEMETYPE_ = 'dark';
+var initChart = function( type ){
+    //初始化设置主题 dark light
+    window._CHART_THEMETYPE_ = type;
+    const outFontColor = type === 'dark' ? 'rgba(255,255,255,.6)' : 'rgba(0,0,0,.1)';
+
+    //echarts1=>要保证数据是先排序完成的结果
+    const echarts1 = chartMerge({
+        chartType: 'Funnel'
+        }, {
+        series: [{
+            label: {
+                show: true,
+                fontSize: 14,
+                position: 'inside',
+                formatter: '{b}({c}%)'
+            },
+            minSize: 60,
+            data: [{
+                    value: 60,
+                    name: '访问'
+                },
+                {
+                    value: 40,
+                    name: '咨询'
+                },
+                {
+                    value: 20,
+                    name: '订单'
+                },
+                {
+                    value: 80,
+                    name: '点击'
+                },
+                {
+                    value: 100,
+                    name: '展现'
+                }
+            ].sort((a, b) => {
+                return a.value - b.value > 0 ? 1 : -1;
+            })
+        }]
+    });
+    const echarts1Elem = window.echarts.init(document.querySelector('.echarts-line1'));
+    console.log(echarts1, '----echarts1')
+    echarts1Elem.setOption(echarts1);
 
 
-//echarts1=>要保证数据是先排序完成的结果
-const echarts1 = chartMerge({
-    chartType: 'Funnel'
-    }, {
-    series: [{
-        label: {
-            show: true,
-            fontSize: 14,
-            position: 'inside',
-            formatter: '{b}({c}%)'
-        },
-        minSize: 60,
-        data: [{
-                value: 60,
-                name: '访问'
+    //echarts2=>要保证数据是先排序完成的结果
+    const echarts2 = chartMerge({
+        chartType: 'Funnel'
+        }, {
+        series: [
+            {
+                label: {
+                    show: true,
+                    fontSize: 14,
+                    position: 'inside',
+                    formatter: '{c}%'
+                },
+                minSize: 60,
+                data: [{
+                        value: 60,
+                        name: '访问'
+                    },
+                    {
+                        value: 40,
+                        name: '咨询'
+                    },
+                    {
+                        value: 20,
+                        name: '订单'
+                    },
+                    {
+                        value: 80,
+                        name: '点击'
+                    },
+                    {
+                        value: 100,
+                        name: '展现'
+                    }
+                ].sort((a, b) => {
+                    return a.value - b.value > 0 ? 1 : -1;
+                })
             },
             {
-                value: 40,
-                name: '咨询'
-            },
-            {
-                value: 20,
-                name: '订单'
-            },
-            {
-                value: 80,
-                name: '点击'
-            },
-            {
-                value: 100,
-                name: '展现'
+                label: {
+                    show: true,
+                    fontSize: 12,
+                    position: 'outside',
+                    color : outFontColor,
+                    formatter: '{b}'
+                },
+                minSize: 60,
+                data: [{
+                        value: 60,
+                        name: '访问'
+                    },
+                    {
+                        value: 40,
+                        name: '咨询'
+                    },
+                    {
+                        value: 20,
+                        name: '订单'
+                    },
+                    {
+                        value: 80,
+                        name: '点击'
+                    },
+                    {
+                        value: 100,
+                        name: '展现'
+                    }
+                ].sort((a, b) => {
+                    return a.value - b.value > 0 ? 1 : -1;
+                })
             }
-        ].sort((a, b) => {
-            return a.value - b.value > 0 ? 1 : -1;
-        })
-    }]
-});
-const echarts1Elem = window.echarts.init(document.querySelector('.echarts-line1'));
-console.log(echarts1, '----echarts1')
-console.log(echarts1Elem, '---echarts1Elem')
-echarts1Elem.setOption(echarts1);
+        ]
+    });
+    const echarts2Elem = window.echarts.init(document.querySelector('.echarts-line2'));
+    console.log(echarts2, '----echarts2')
+    echarts2Elem.setOption(echarts2);
+}
 
 
-
+initChart('dark');
 </script>
 </body>
 

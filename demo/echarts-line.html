@@ -4,24 +4,7 @@
 <title>线图柱图</title>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width'>
-<style>
-*{
-    padding: 0;
-    margin: 0;
-}
-body{
-    font-size: 12px;
-    padding: 50px;
-    background: #06183e
-}
-
-.echarts-line{
-    width: 500px;
-    height: 300px;
-    background: #052153;
-    margin-bottom: 30px;
-}
-</style>
+<link href="./css/css.css" rel="stylesheet">
 </head>
 <body>
 <div class="echarts-line echarts-line1"></div>
@@ -29,15 +12,16 @@ body{
 <div class="echarts-line echarts-line3"></div>
 <div class="echarts-line echarts-line4"></div>
 <div class="echarts-line echarts-line5"></div>
+<div class="theme-button">dark</div>
 <script type="text/javascript" src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
 <script src="../dist/echarts.config.js"></script>
+<script src="./js/changeTheme.js"></script>
 <script>
     
 const { chartMerge,insertChartConfig,resetColorConfig } = echartsConfig;
 
-//初始化设置主题 dark light
-window._CHART_THEMETYPE_ = 'dark';
-
+var initChart = function( type ){
+    window._CHART_THEMETYPE_ = type;
     //echarts1
     const echarts1 = chartMerge({ chartType : 'lineBar' },{
         series : [
@@ -180,6 +164,10 @@ window._CHART_THEMETYPE_ = 'dark';
     const echarts5Elem = window.echarts.init( document.querySelector('.echarts-line5') );
     console.log( echarts5,'---echarts4' )
     echarts5Elem.setOption( echarts5 );
+}
+initChart('dark');    
+
+    
 </script>
 </body>
 </html>

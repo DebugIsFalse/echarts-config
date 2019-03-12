@@ -4,104 +4,93 @@
 <title>雷达图</title>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width'>
-<style>
-*{
-    padding: 0;
-    margin: 0;
-}
-body{
-    font-size: 12px;
-    padding: 50px;
-    background: #06183e
-}
-
-.echarts-line{
-    width: 500px;
-    height: 400px;
-    background: #052153;
-    margin-bottom: 30px;
-}
-</style>
+<link href="./css/css.css" rel="stylesheet">
 </head>
 <body>
     <div class="echarts-line echarts-line1"></div>
     <div class="echarts-line echarts-line2"></div>
+    <div class="theme-button">dark</div>
     <script type="text/javascript" src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
     <script src="../dist/echarts.config.js"></script>
+    <script src="./js/changeTheme.js"></script>
     <script>
         const { chartMerge,insertChartConfig,resetColorConfig } = echartsConfig;
 
-        //初始化设置主题 dark light
-        window._CHART_THEMETYPE_ = 'dark';
+        var initChart = function( type ){
+            //初始化设置主题 dark light
+            window._CHART_THEMETYPE_ = type;
 
-        //echarts1
-        const echarts1 = chartMerge({ chartType : 'Radar' },{
-            radar : {
-                indicator: [
-                    { name: '销售', max: 6500},
-                    { name: '管理', max: 16000},
-                    { name: '信息技术', max: 30000},
-                    { name: '客服', max: 38000},
-                    { name: '研发', max: 52000},
-                    { name: '市场', max: 25000}
-                ]
-            },
-            series : [
-                {
-                    name: '预算 vs 开销',
-                    type: 'radar',
-                    data : [
-                        {
-                            value : [4300, 10000, 28000, 35000, 50000, 19000],
-                            name : '预算分配'
-                        },
-                        {
-                            value : [5000, 14000, 28000, 31000, 42000, 21000],
-                            name : '实际开销'
-                        }
+            //echarts1
+            const echarts1 = chartMerge({ chartType : 'Radar' },{
+                radar : {
+                    indicator: [
+                        { name: '销售', max: 6500},
+                        { name: '管理', max: 16000},
+                        { name: '信息技术', max: 30000},
+                        { name: '客服', max: 38000},
+                        { name: '研发', max: 52000},
+                        { name: '市场', max: 25000}
                     ]
-                }
-            ]
-        });
-        const echarts1Elem = window.echarts.init( document.querySelector('.echarts-line1') );
-        echarts1Elem.setOption( echarts1 );
-
-        //echarts1
-        const echarts2 = chartMerge({ chartType : 'Radar' },{
-            radar : {
-                indicator: [
-                    { name: '销售', max: 6500},
-                    { name: '管理', max: 16000},
-                    { name: '信息技术', max: 30000},
-                    { name: '客服', max: 38000},
-                    { name: '研发', max: 52000},
-                    { name: '市场', max: 25000}
+                },
+                series : [
+                    {
+                        name: '预算 vs 开销',
+                        type: 'radar',
+                        data : [
+                            {
+                                value : [4300, 10000, 28000, 35000, 50000, 19000],
+                                name : '预算分配'
+                            },
+                            {
+                                value : [5000, 14000, 28000, 31000, 42000, 21000],
+                                name : '实际开销'
+                            }
+                        ]
+                    }
                 ]
-            },
-            series : [
-                {
-                    name: '预算 vs 开销',
-                    type: 'radar',
-                    areaStyle: {
-                        opacity : 0.3
-                    },
-                    data : [
-                        {
-                            value : [4300, 10000, 28000, 35000, 50000, 19000],
-                            name : '预算分配'
-                        },
-                        {
-                            value : [5000, 14000, 28000, 31000, 42000, 21000],
-                            name : '实际开销'
-                        }
-                    ]
-                }
-            ]
-        });
-        const echarts2Elem = window.echarts.init( document.querySelector('.echarts-line2') );
-        echarts2Elem.setOption( echarts2 );
+            });
+            const echarts1Elem = window.echarts.init( document.querySelector('.echarts-line1') );
+            console.log(echarts1,'---echarts1')
+            echarts1Elem.setOption( echarts1 );
 
-       
+            //echarts1
+            const echarts2 = chartMerge({ chartType : 'Radar' },{
+                radar : {
+                    indicator: [
+                        { name: '销售', max: 6500},
+                        { name: '管理', max: 16000},
+                        { name: '信息技术', max: 30000},
+                        { name: '客服', max: 38000},
+                        { name: '研发', max: 52000},
+                        { name: '市场', max: 25000}
+                    ]
+                },
+                series : [
+                    {
+                        name: '预算 vs 开销',
+                        type: 'radar',
+                        areaStyle: {
+                            opacity : 0.3
+                        },
+                        data : [
+                            {
+                                value : [4300, 10000, 28000, 35000, 50000, 19000],
+                                name : '预算分配'
+                            },
+                            {
+                                value : [5000, 14000, 28000, 31000, 42000, 21000],
+                                name : '实际开销'
+                            }
+                        ]
+                    }
+                ]
+            });
+            const echarts2Elem = window.echarts.init( document.querySelector('.echarts-line2') );
+            console.log(echarts2,'---echarts2')
+            echarts2Elem.setOption( echarts2 );
+
+        }
+        initChart('dark');
     </script>
 </body>
 </html>

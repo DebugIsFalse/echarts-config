@@ -4,95 +4,80 @@
 <title>矩形树图</title>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width'>
-<style>
-*{
-    padding: 0;
-    margin: 0;
-}
-body{
-    font-size: 12px;
-    padding: 50px;
-    background: #06183e
-}
-
-.echarts-line{
-    width: 500px;
-    padding: 20px;
-    height: 300px;
-    background: #052153;
-    margin-bottom: 30px;
-}
-</style>
+<link href="./css/css.css" rel="stylesheet">
 </head>
 <body>
     <div class="echarts-line echarts-line1"></div>
+    <div class="theme-button">dark</div>
     <script type="text/javascript" src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
     <script src="../dist/echarts.config.js"></script>
+    <script src="./js/changeTheme.js"></script>
     <script>
         const { chartMerge,insertChartConfig,resetColorConfig } = echartsConfig;
 
-        //初始化设置主题 dark light
-        window._CHART_THEMETYPE_ = 'dark';
-
-        //echarts1
-        const echarts1 = chartMerge({ chartType : 'TreeMap' },{
-            series : [
-                {
-                    label : {
-                        show : true,
-                        position : 'inside',
-                        //已被内置了名称和数字的字体设置
-                        formatter : ['{name|{b}}','{des|{c}%}'].join('\n')
-                    },
-                    data: [{
-                        name: 'APPLE',            // First tree
-                        value: 10,
-                        children: [{
-                            name: 'iphone6',       // First leaf of first tree
-                            value: 4
-                        }, {
-                            name: 'iphone7',       // Second leaf of first tree
-                            value: 6
-                        }]
-                    },{
-                        name: 'HUWEI',            // Second tree
-                        value: 20,
-                        children: [{
-                            name: 'METO9',       // Son of first tree
+        var initChart = function( type ){
+            //初始化设置主题 dark light
+            window._CHART_THEMETYPE_ = type;
+            //echarts1
+            const echarts1 = chartMerge({ chartType : 'TreeMap' },{
+                series : [
+                    {
+                        label : {
+                            show : true,
+                            position : 'inside',
+                            //已被内置了名称和数字的字体设置
+                            formatter : ['{name|{b}}','{des|{c}%}'].join('\n')
+                        },
+                        data: [{
+                            name: 'APPLE',            // First tree
+                            value: 10,
+                            children: [{
+                                name: 'iphone6',       // First leaf of first tree
+                                value: 4
+                            }, {
+                                name: 'iphone7',       // Second leaf of first tree
+                                value: 6
+                            }]
+                        },{
+                            name: 'HUWEI',            // Second tree
                             value: 20,
                             children: [{
-                                name: 'METO9-1',  // Granson of first tree
-                                value: 20
+                                name: 'METO9',       // Son of first tree
+                                value: 20,
+                                children: [{
+                                    name: 'METO9-1',  // Granson of first tree
+                                    value: 20
+                                }]
+                            }]
+                        },{
+                            name: 'MI',            // Second tree
+                            value: 20,
+                            children: [{
+                                name: 'MI7',       // First leaf of first tree
+                                value: 4
+                            }, {
+                                name: 'MI9',       // Second leaf of first tree
+                                value: 6
+                            }]
+                        },{
+                            name: 'SAMSUNG',            // Second tree
+                            value: 20,
+                            children: [{
+                                name: 'S3',       // First leaf of first tree
+                                value: 4
+                            }, {
+                                name: 'S4',       // Second leaf of first tree
+                                value: 6
                             }]
                         }]
-                    },{
-                        name: 'MI',            // Second tree
-                        value: 20,
-                        children: [{
-                            name: 'MI7',       // First leaf of first tree
-                            value: 4
-                        }, {
-                            name: 'MI9',       // Second leaf of first tree
-                            value: 6
-                        }]
-                    },{
-                        name: 'SAMSUNG',            // Second tree
-                        value: 20,
-                        children: [{
-                            name: 'S3',       // First leaf of first tree
-                            value: 4
-                        }, {
-                            name: 'S4',       // Second leaf of first tree
-                            value: 6
-                        }]
-                    }]
-                }
-            ]
-        });
-        const echarts1Elem = window.echarts.init( document.querySelector('.echarts-line1') );
-        console.log(echarts1,'----echarts1')
-        echarts1Elem.setOption( echarts1 );
-
+                    }
+                ]
+            });
+            const echarts1Elem = window.echarts.init( document.querySelector('.echarts-line1') );
+            console.log(echarts1,'----echarts1')
+            echarts1Elem.setOption( echarts1 );
+        }
+        initChart( 'dark' );
     </script>
 </body>
 </html>

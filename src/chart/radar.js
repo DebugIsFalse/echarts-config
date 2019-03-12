@@ -28,6 +28,11 @@ export const Radar = function( config ){
         radar : {
             radius : '65%',
             center: ['50%', '53%'],
+            name : {
+                textStyle : {
+                    color : colorConfig.FONTCOLOR
+                }
+            },
             splitArea : {
                 show : false
             },
