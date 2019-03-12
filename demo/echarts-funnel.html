@@ -36,6 +36,10 @@ const {
     resetColorConfig
 } = echartsConfig;
 
+//初始化设置主题 dark light
+window._CHART_THEMETYPE_ = 'dark';
+
+
 //echarts1=>要保证数据是先排序完成的结果
 const echarts1 = chartMerge({
     chartType: 'Funnel'

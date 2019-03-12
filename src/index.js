@@ -6,7 +6,7 @@ import { Scatter } from './chart/scatter';
 import { TreeMap } from './chart/treeMap';
 import { Funnel } from './chart/funnel';
 import { deepCopy,merge,isArray } from './util/util';
-import colorConfig from './config/color';
+import { getColor } from './config/color';
 import { getLegend } from './util/getLegend';
 import { updateTransverse } from './util/updateLineBarTransverse'
 import { updatePieConfig } from './util/updatePieConfig'
@@ -21,6 +21,8 @@ const chartConfig = {
     Funnel : Funnel
 }
 
+window._CHART_THEMETYPE_ = window._CHART_THEMETYPE_ ? window._CHART_THEMETYPE_ : 'light';
+
 /*
  * 合并业务配置 返回一个图表的基础配置
 */
@@ -31,7 +33,7 @@ const chartMerge = function(baseInfo = {},config = {}){
         return ;
     }
     const chartType = baseInfo.chartType;
-    const returnConfig = deepCopy( chartConfig[baseInfo.chartType] );
+    const returnConfig = chartConfig[baseInfo.chartType]( baseInfo );
 
     //设置 柱图线图的配置横向纵向
     const lineBarDrections = 'transverse'//横向
@@ -66,9 +68,9 @@ const chartMerge = function(baseInfo = {},config = {}){
     if( !returnConfig.color  ){
         //特殊处理漏斗颜色色值
         if( baseInfo.chartType === 'Funnel' ){
-            returnConfig.color = deepCopy( colorConfig.FUNNELCOLORS );
+            returnConfig.color = deepCopy( getColor('dark').FUNNELCOLORS );
         }else{
-            returnConfig.color = deepCopy( colorConfig.COLORS );
+            returnConfig.color = deepCopy( getColor('dark').COLORS );
         }
         
     }

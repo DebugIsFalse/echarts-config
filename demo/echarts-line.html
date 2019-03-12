@@ -24,158 +24,162 @@ body{
 </style>
 </head>
 <body>
-    <div class="echarts-line echarts-line1"></div>
-    <div class="echarts-line echarts-line2"></div>
-    <div class="echarts-line echarts-line3"></div>
-    <div class="echarts-line echarts-line4"></div>
-    <div class="echarts-line echarts-line5"></div>
-    <script type="text/javascript" src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
-    <script src="../dist/echarts.config.js"></script>
-    <script>
-        const { chartMerge,insertChartConfig,resetColorConfig } = echartsConfig;
+<div class="echarts-line echarts-line1"></div>
+<div class="echarts-line echarts-line2"></div>
+<div class="echarts-line echarts-line3"></div>
+<div class="echarts-line echarts-line4"></div>
+<div class="echarts-line echarts-line5"></div>
+<script type="text/javascript" src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
+<script src="../dist/echarts.config.js"></script>
+<script>
+    
+const { chartMerge,insertChartConfig,resetColorConfig } = echartsConfig;
 
-        //echarts1
-        const echarts1 = chartMerge({ chartType : 'lineBar' },{
-            series : [
-                {
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
-                    type: 'bar'
-                },{
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
-                    type: 'line'
-                }
-            ],
-            xAxis : {
-                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+//初始化设置主题 dark light
+window._CHART_THEMETYPE_ = 'dark';
+
+    //echarts1
+    const echarts1 = chartMerge({ chartType : 'lineBar' },{
+        series : [
+            {
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'bar'
+            },{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line'
             }
-        });
-        const echarts1Elem = window.echarts.init( document.querySelector('.echarts-line1') );
-        echarts1Elem.setOption( echarts1 );
+        ],
+        xAxis : {
+            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        }
+    });
+    const echarts1Elem = window.echarts.init( document.querySelector('.echarts-line1') );
+    echarts1Elem.setOption( echarts1 );
 
-        //echarts1
-        const echarts2 = chartMerge({ chartType : 'lineBar' },{
-            series : [
-                {
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
-                    type: 'line',
-                    areaStyle: {
-                        opacity : .2
+    //echarts1
+    const echarts2 = chartMerge({ chartType : 'lineBar' },{
+        series : [
+            {
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line',
+                areaStyle: {
+                    opacity : .2
+                }
+            }
+        ],
+        xAxis : {
+            boundaryGap : false,
+            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        }
+    });
+    const echarts2Elem = window.echarts.init( document.querySelector('.echarts-line2') );
+    console.log( echarts2,'---echarts2' )
+    echarts2Elem.setOption( echarts2 );
+
+
+    //echarts3
+    const echarts3 = chartMerge({ chartType : 'lineBar' },{
+        series : [
+            {
+                name: 'Forest',
+                type: 'bar',
+                barGap: 0,
+                data: [320, 332, 301, 334, 390]
+            },
+            {
+                name: 'Steppe',
+                type: 'bar',
+                data: [220, 182, 191, 234, 290]
+            },
+            {
+                name: 'Desert',
+                type: 'bar',
+                data: [150, 232, 201, 154, 190]
+            },
+            {
+                name: 'Wetland',
+                type: 'bar',
+                data: [98, 77, 101, 99, 40]
+            }
+        ],
+        xAxis : {
+            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+        }
+    });
+    const echarts3Elem = window.echarts.init( document.querySelector('.echarts-line3') );
+    console.log( echarts3,'---echarts3' )
+    echarts3Elem.setOption( echarts3 );
+
+
+    //echarts4
+    const echarts4 = chartMerge({ chartType : 'lineBar',direction : 'transverse' },{
+        series : [
+            {
+                name: 'Forest',
+                type: 'bar',
+                barGap: 0,
+                data: [320, 332, 301, 334, 390]
+            },
+            {
+                name: 'Steppe',
+                type: 'bar',
+                data: [220, 182, 191, 234, 290]
+            },
+            {
+                name: 'Desert',
+                type: 'bar',
+                data: [150, 232, 201, 154, 190]
+            },
+            {
+                name: 'Wetland',
+                type: 'bar',
+                data: [98, 77, 101, 99, 40]
+            }
+        ],
+        yAxis : {
+            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+        }
+    });
+    const echarts4Elem = window.echarts.init( document.querySelector('.echarts-line4') );
+    console.log( echarts4,'---echarts4' )
+    echarts4Elem.setOption( echarts4 );
+
+
+        //echarts5
+        const echarts5 = chartMerge({ chartType : 'lineBar',direction : 'transverse' },{
+        series : [
+            {
+                name: '直接访问',
+                type: 'bar',
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight'
                     }
-                }
-            ],
-            xAxis : {
-                boundaryGap : false,
-                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-            }
-        });
-        const echarts2Elem = window.echarts.init( document.querySelector('.echarts-line2') );
-        console.log( echarts2,'---echarts2' )
-        echarts2Elem.setOption( echarts2 );
-
-
-        //echarts3
-        const echarts3 = chartMerge({ chartType : 'lineBar' },{
-            series : [
-                {
-                    name: 'Forest',
-                    type: 'bar',
-                    barGap: 0,
-                    data: [320, 332, 301, 334, 390]
                 },
-                {
-                    name: 'Steppe',
-                    type: 'bar',
-                    data: [220, 182, 191, 234, 290]
+                data: [320, 302, 301, 334, 390]
+            },
+            {
+                name: '邮件营销',
+                type: 'bar',
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight'
+                    }
                 },
-                {
-                    name: 'Desert',
-                    type: 'bar',
-                    data: [150, 232, 201, 154, 190]
-                },
-                {
-                    name: 'Wetland',
-                    type: 'bar',
-                    data: [98, 77, 101, 99, 40]
-                }
-            ],
-            xAxis : {
-                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-            }
-        });
-        const echarts3Elem = window.echarts.init( document.querySelector('.echarts-line3') );
-        console.log( echarts3,'---echarts3' )
-        echarts3Elem.setOption( echarts3 );
-
-
-        //echarts4
-        const echarts4 = chartMerge({ chartType : 'lineBar',direction : 'transverse' },{
-            series : [
-                {
-                    name: 'Forest',
-                    type: 'bar',
-                    barGap: 0,
-                    data: [320, 332, 301, 334, 390]
-                },
-                {
-                    name: 'Steppe',
-                    type: 'bar',
-                    data: [220, 182, 191, 234, 290]
-                },
-                {
-                    name: 'Desert',
-                    type: 'bar',
-                    data: [150, 232, 201, 154, 190]
-                },
-                {
-                    name: 'Wetland',
-                    type: 'bar',
-                    data: [98, 77, 101, 99, 40]
-                }
-            ],
-            yAxis : {
-                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-            }
-        });
-        const echarts4Elem = window.echarts.init( document.querySelector('.echarts-line4') );
-        console.log( echarts4,'---echarts4' )
-        echarts4Elem.setOption( echarts4 );
-
-
-         //echarts5
-         const echarts5 = chartMerge({ chartType : 'lineBar',direction : 'transverse' },{
-            series : [
-                {
-                    name: '直接访问',
-                    type: 'bar',
-                    stack: '总量',
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'insideRight'
-                        }
-                    },
-                    data: [320, 302, 301, 334, 390]
-                },
-                {
-                    name: '邮件营销',
-                    type: 'bar',
-                    stack: '总量',
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'insideRight'
-                        }
-                    },
-                    data: [120, 132, 101, 134, 90]
-                },
-            ],
-            yAxis : {
-                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-            }
-        });
-        const echarts5Elem = window.echarts.init( document.querySelector('.echarts-line5') );
-        console.log( echarts5,'---echarts4' )
-        echarts5Elem.setOption( echarts5 );
-    </script>
+                data: [120, 132, 101, 134, 90]
+            },
+        ],
+        yAxis : {
+            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+        }
+    });
+    const echarts5Elem = window.echarts.init( document.querySelector('.echarts-line5') );
+    console.log( echarts5,'---echarts4' )
+    echarts5Elem.setOption( echarts5 );
+</script>
 </body>
 </html>

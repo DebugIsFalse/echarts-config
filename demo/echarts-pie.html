@@ -31,6 +31,9 @@ body{
     <script>
         const { chartMerge,insertChartConfig,resetColorConfig } = echartsConfig;
 
+        //初始化设置主题 dark light
+        window._CHART_THEMETYPE_ = 'dark';
+
         //echarts1
         const echarts1 = chartMerge({ chartType : 'Pie' },{
             series : [{

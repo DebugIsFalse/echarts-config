@@ -1,317 +1,372 @@
 var echartsConfig = (function (exports) {
     'use strict';
 
-    var colorConfig = {
-        COLORS : ['rgba(45,140,240,1)','rgba(0,210,179,1)','rgba(251,169,0,1)','rgba(242,112,54,1)','rgba(181,40,81,1)','rgba(45,51,138,1)', 'rgba(172,63,192,1)', 'rgba(102,58,183,1)','rgba(67,86,205,1)','rgba(16,157,88)','rgba(123,179,66,1)','rgba(191,197,33,1)'],
-        FONTCOLOR : 'rgba(255,255,255,.55)',
-        AXISLINECOLOR : '#324771',
-        RADARAREACOLOR : 'rgba(255,255,255,.3)',
-        TREEMAPBREADCOLOR : "rgba(23,35,61,0.75)",
-        FUNNELCOLORS : ['#E4F3FF','#68B8FF','#2E9AFF','#2A79DC','#2149AB'],
-        FUNNELFONTCOLOR : 'rgba(255,255,255,1)'
+    const COLORS = ['rgba(45,140,240,1)','rgba(0,210,179,1)','rgba(251,169,0,1)','rgba(242,112,54,1)','rgba(181,40,81,1)','rgba(45,51,138,1)', 'rgba(172,63,192,1)', 'rgba(102,58,183,1)','rgba(67,86,205,1)','rgba(16,157,88)','rgba(123,179,66,1)','rgba(191,197,33,1)'];
+    const FUNNELCOLORS = ['#E4F3FF','#68B8FF','#2E9AFF','#2A79DC','#2149AB'];
+    const RADARAREACOLOR = 'rgba(255,255,255,.3)';
+    const FUNNELFONTCOLOR = 'rgba(255,255,255,1)';
+
+    const FONTCOLOR_DARK = 'rgba(255,255,255,.55)';
+    const AXISLINECOLOR_DARK = '#324771';
+    const TREEMAPBREADCOLOR_DARK = "rgba(23,35,61,0.75)";
+
+
+
+    const FONTCOLOR_LIGHT = 'rgba(0,0,0,.55)';
+    const AXISLINECOLOR_LIGHT = 'rgba(0,0,0,.5)';
+    const TREEMAPBREADCOLOR_LIGHT = "rgba(23,35,61,0.75)";
+
+
+    const defaultsColor = {
+        dark : {
+            COLORS : COLORS,
+            FONTCOLOR : FONTCOLOR_DARK,
+            AXISLINECOLOR : AXISLINECOLOR_DARK,
+            RADARAREACOLOR : RADARAREACOLOR,
+            TREEMAPBREADCOLOR : TREEMAPBREADCOLOR_DARK,
+            FUNNELCOLORS : FUNNELCOLORS,
+            FUNNELFONTCOLOR : FUNNELFONTCOLOR
+        },
+        light : {
+            COLORS : COLORS,
+            FONTCOLOR : FONTCOLOR_LIGHT,
+            AXISLINECOLOR : AXISLINECOLOR_LIGHT,
+            RADARAREACOLOR : RADARAREACOLOR,
+            TREEMAPBREADCOLOR : TREEMAPBREADCOLOR_LIGHT,
+            FUNNELCOLORS : FUNNELCOLORS,
+            FUNNELFONTCOLOR : FUNNELFONTCOLOR
+        }
     };
 
-    const lineBar = {
-        grid : {
-            top: '50px',
-            left: '5%',
-            right: '5%',
-            bottom: '5%',
-            containLabel: true
-        },
-        tooltip : {
-            show: true,
-            trigger: 'axis'
-        },
-        legend : {
-            type: 'scroll',
-            top : '10px',
-            itemHeight: 4,
-            textStyle: {
-                padding: [0, 0, 2, 3],
-                color: colorConfig.FONTCOLOR
+    const getColor = function(type){
+        return defaultsColor[type];
+    };
+
+    const types = ['dark','light'];
+    const getThemeType = function( config ){
+        return types.includes( config.themeType ) > 0 ? config.themeType : window._CHART_THEMETYPE_;
+    };
+
+    const lineBar = function(config){
+        const colorConfig = getColor( getThemeType( config ) );
+        return {
+            grid : {
+                top: '50px',
+                left: '5%',
+                right: '5%',
+                bottom: '5%',
+                containLabel: true
             },
-            borderRadius : 4,
-            data: []
-        },
-        xAxis : {
-            type: 'category',
-            boundaryGap:true,
-            axisLine: {
-                show: false,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
+            tooltip : {
+                show: true,
+                trigger: 'axis'
+            },
+            legend : {
+                type: 'scroll',
+                top : '10px',
+                itemHeight: 4,
+                textStyle: {
+                    padding: [0, 0, 2, 3],
+                    color: colorConfig.FONTCOLOR
+                },
+                borderRadius : 4,
+                data: []
+            },
+            xAxis : {
+                type: 'category',
+                boundaryGap:true,
+                axisLine: {
+                    show: false,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: false,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                axisLabel: {
+                    color : colorConfig.FONTCOLOR
                 }
             },
-            axisTick: {
-                show: false
-            },
-            splitLine: {
-                show: false,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
+            yAxis : {
+                type: 'value',
+                boundaryGap:["0","23%"],
+                axisLine: {
+                    show: false,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                splitLine : {
+                    show : true,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                axisTick: {
+                    show: true
+                },
+                axisLabel: {
+                    color: colorConfig.FONTCOLOR
                 }
-            },
-            axisLabel: {
-                color : colorConfig.FONTCOLOR
             }
-        },
-        yAxis : {
-            type: 'value',
-            boundaryGap:["0","23%"],
-            axisLine: {
-                show: false,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
-                }
-            },
-            splitLine : {
-                show : true,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
-                }
-            },
-            axisTick: {
-                show: true
-            },
-            axisLabel: {
-                color: colorConfig.FONTCOLOR
-            }
-        }
+        };
     };
 
     /*
      * 饼图
     */
-    const Pie = {
-        grid : {
-            show: false
-        },
-        legend : {
-            right: '20px',
-            top: 'middle',
-            itemHeight: 10,
-            itemWidth: 10,
-            orient: 'vertical',
-            textStyle: {
-                padding: [0, 0, 3, 3],
-                color: colorConfig.FONTCOLOR
+
+    const Pie = function( config ){
+        const colorConfig = getColor( getThemeType( config ) );
+        return {
+            grid : {
+                show: false
             },
-            data: []
-        },
-        tooltip : {
-            show: false,
-            trigger: 'axis'
-        },
-        series : {
-            type: 'pie',
-            center : ['40%','50%'],
-            radius: ['50%', '80%'],
-            hoverAnimation : false,
-            label : {
-                normal: {
-                    show: false,
-                    position: 'center'
+            legend : {
+                right: '20px',
+                top: 'middle',
+                itemHeight: 10,
+                itemWidth: 10,
+                orient: 'vertical',
+                textStyle: {
+                    padding: [0, 0, 3, 3],
+                    color: colorConfig.FONTCOLOR
                 },
-                emphasis: {
-                    show: true,
-                    textStyle: {
-                        fontSize: '16',
-                        fontWeight: 'bold'
-                    }
-                }
+                data: []
             },
-            //center: ['30%', '50%'],
-            //是否启用防止标签重叠策略，默认开启，在标签拥挤重叠的情况下会挪动各个标签的位置，防止标签间的重叠。如果不需要开启该策略，例如圆环图这个例子中需要强制所有标签放在中心位置，可以将该值设为 false
-            avoidLabelOverlap: false,
-            data: []
-        }
+            tooltip : {
+                show: false,
+                trigger: 'axis'
+            },
+            series : {
+                type: 'pie',
+                center : ['40%','50%'],
+                radius: ['50%', '80%'],
+                hoverAnimation : false,
+                label : {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '16',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                //center: ['30%', '50%'],
+                //是否启用防止标签重叠策略，默认开启，在标签拥挤重叠的情况下会挪动各个标签的位置，防止标签间的重叠。如果不需要开启该策略，例如圆环图这个例子中需要强制所有标签放在中心位置，可以将该值设为 false
+                avoidLabelOverlap: false,
+                data: []
+            }
+        };
     };
 
     /*
      * 雷达图
     */
-    const Radar = {
-        grid : {
-            show: false,
-        },
-        legend : {
-            itemHeight: 5,
-            itemWidth: 20,
-            orient: 'horizontal',
-            padding :[15,5],
-            textStyle: {
-                padding: [0, 0, 3, 3],
-                color: colorConfig.FONTCOLOR
+
+    const Radar = function( config ){
+        const colorConfig = getColor( getThemeType( config ) );
+        return {
+            grid : {
+                show: false,
             },
-            data: []
-        },
-        tooltip : {
-            show: false,
-            trigger: 'axis'
-        },
-        radar : {
-            radius : '65%',
-            center: ['50%', '53%'],
-            splitArea : {
-                show : false
+            legend : {
+                itemHeight: 5,
+                itemWidth: 20,
+                orient: 'horizontal',
+                padding :[15,5],
+                textStyle: {
+                    padding: [0, 0, 3, 3],
+                    color: colorConfig.FONTCOLOR
+                },
+                data: []
             },
-            axisLine : {
-                lineStyle: {
-                    color: colorConfig.RADARAREACOLOR
+            tooltip : {
+                show: false,
+                trigger: 'axis'
+            },
+            radar : {
+                radius : '65%',
+                center: ['50%', '53%'],
+                splitArea : {
+                    show : false
+                },
+                axisLine : {
+                    lineStyle: {
+                        color: colorConfig.RADARAREACOLOR
+                    }
+                },
+                splitLine : {
+                    show : true,
+                    lineStyle : {
+                        color : colorConfig.RADARAREACOLOR
+                    }
                 }
             },
-            splitLine : {
-                show : true,
-                lineStyle : {
-                    color : colorConfig.RADARAREACOLOR
-                }
+            series : {
+                type: 'radar',
+                data: []
             }
-        },
-        series : {
-            type: 'radar',
-            data: []
-        }
+        };
     };
 
     /*
      * 散点图
     */
-    const Scatter = {
-        legend : {
-            itemHeight: 10,
-            itemWidth: 10,
-            orient: 'horizontal',
-            padding :[10,5],
-            textStyle: {
-                padding: [0, 0, 3, 3],
-                color: colorConfig.FONTCOLOR
+
+    const Scatter = function( config ){
+        const colorConfig = getColor( getThemeType( config ) );
+        return {
+            legend : {
+                itemHeight: 10,
+                itemWidth: 10,
+                orient: 'horizontal',
+                padding :[10,5],
+                textStyle: {
+                    padding: [0, 0, 3, 3],
+                    color: colorConfig.FONTCOLOR
+                },
+                data: []
             },
-            data: []
-        },
-        tooltip : {
-            show: true,
-            trigger: 'axis'
-        },
-        series : {
-            type: 'scatter',
-            data: []
-        },
-        xAxis : {
-            boundaryGap:["0","23%"],
-            axisLine: {
+            tooltip : {
                 show: true,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
+                trigger: 'axis'
+            },
+            series : {
+                type: 'scatter',
+                data: []
+            },
+            xAxis : {
+                boundaryGap:["0","23%"],
+                axisLine: {
+                    show: true,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: false,
+                },
+                axisLabel: {
+                    color : colorConfig.FONTCOLOR
                 }
             },
-            axisTick: {
-                show: false
-            },
-            splitLine: {
-                show: false,
-            },
-            axisLabel: {
-                color : colorConfig.FONTCOLOR
-            }
-        },
-        yAxis : {
-            boundaryGap:["0","23%"],
-            axisLine: {
-                show: true,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
+            yAxis : {
+                boundaryGap:["0","23%"],
+                axisLine: {
+                    show: true,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                splitLine : {
+                    show : false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    color: colorConfig.FONTCOLOR
                 }
-            },
-            splitLine : {
-                show : false
-            },
-            axisTick: {
-                show: false
-            },
-            axisLabel: {
-                color: colorConfig.FONTCOLOR
             }
-        }
+        };
     };
 
     /*
      * 矩形树图
     */
-    const TreeMap = {
-        series : {
-            name: 'brand',
-            label : {
-                rich : {
-                    name : {
-                        color : "#fff",
-                        fontSize : 12,
-                    },
-                    des : {
-                        color : "#fff",
-                        height : 30,
-                        padding : [10,0,0,14],
-                        fontSize : 20
+
+    const TreeMap = function( config ){
+        const colorConfig = getColor( getThemeType( config ) );
+        return {
+            series : {
+                name: 'brand',
+                label : {
+                    rich : {
+                        name : {
+                            color : "#fff",
+                            fontSize : 12,
+                        },
+                        des : {
+                            color : "#fff",
+                            height : 30,
+                            padding : [10,0,0,14],
+                            fontSize : 20
+                        }
                     }
-                }
-            },
-            type: 'treemap',
-            fontFamily : 'Roboto-Regular',
-            leafDepth: 1,
-            roam: false,
-            width: '100%',
-            height: '90%',
-            top: 'top',
-            data: [],
-            levels: [
-                {
-                    color: colorConfig.COLORS
                 },
-                {
-                    colorSaturation: [0.65],
-                    label: {
-                        normal: {
-                            position: [10, 10],
-                            textStyle: {
-                                fontSize: 16
+                type: 'treemap',
+                fontFamily : 'Roboto-Regular',
+                leafDepth: 1,
+                roam: false,
+                width: '100%',
+                height: '90%',
+                top: 'top',
+                data: [],
+                levels: [
+                    {
+                        color: colorConfig.COLORS
+                    },
+                    {
+                        colorSaturation: [0.65],
+                        label: {
+                            normal: {
+                                position: [10, 10],
+                                textStyle: {
+                                    fontSize: 16
+                                }
+                            },
+                            emphasis: {
+                                position: [10, 10],
+                                textStyle: {
+                                    fontSize: 16
+                                }
                             }
                         },
-                        emphasis: {
-                            position: [10, 10],
-                            textStyle: {
-                                fontSize: 16
+                        itemStyle: {
+                            normal: {
+                                gapWidth: 2,
+                                borderWidth: 1
                             }
                         }
                     },
+                    {
+                        label: {
+                            normal: {
+                                textStyle: {
+                                    fontSize: 14
+                                }
+                            },
+                            emphasis: {
+                                textStyle: {
+                                    fontSize: 14
+                                }
+                            }
+                        }
+                    }
+                ],
+                breadcrumb: {
+                    height: 25,
+                    bottom : 10,
                     itemStyle: {
                         normal: {
-                            gapWidth: 2,
-                            borderWidth: 1
+                            borderWidth: 0,
+                            color : colorConfig.TREEMAPBREADCOLOR
                         }
-                    }
-                },
-                {
-                    label: {
-                        normal: {
-                            textStyle: {
-                                fontSize: 14
-                            }
-                        },
-                        emphasis: {
-                            textStyle: {
-                                fontSize: 14
-                            }
-                        }
-                    }
-                }
-            ],
-            breadcrumb: {
-                height: 25,
-                bottom : 10,
-                itemStyle: {
-                    normal: {
-                        borderWidth: 0,
-                        color : colorConfig.TREEMAPBREADCOLOR
                     }
                 }
             }
@@ -321,41 +376,45 @@ var echartsConfig = (function (exports) {
     /*
      * 堆积图
     */
-    const Funnel = {
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c}"
-        },
-        series : {
-            name:'漏斗图',
-            type:'funnel',
-            left: '10%',
-            top: 20,
-            bottom: 20,
-            width: '80%',
-            min: 0,
-            max: 100,
-            minSize: '0%',
-            maxSize: '100%',
-            sort: 'descending',
-            label: {
-                show: true,
-                position: 'inside',
-                textBorderColor : "rgba(0,0,0,.8)",
-                textShadowOffsetX : 3,
-                textShadowOffsetY : 8,
-                color : colorConfig.FUNNELFONTCOLOR
+
+    const Funnel = function(config){
+        const colorConfig = getColor( getThemeType( config ) );
+        return {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}"
             },
-            labelLine: {
-                length: 30,
-                lineStyle: {
-                    width: 1,
-                    type: 'solid',
-                    color : colorConfig.RADARAREACOLOR
+            series : {
+                name:'漏斗图',
+                type:'funnel',
+                left: '10%',
+                top: 20,
+                bottom: 20,
+                width: '80%',
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                label: {
+                    show: true,
+                    position: 'inside',
+                    textBorderColor : "rgba(0,0,0,.8)",
+                    textShadowOffsetX : 3,
+                    textShadowOffsetY : 8,
+                    color : colorConfig.FUNNELFONTCOLOR
+                },
+                labelLine: {
+                    length: 30,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid',
+                        color : colorConfig.RADARAREACOLOR
+                    }
+                },
+                itemStyle: {
+                    borderWidth : 0
                 }
-            },
-            itemStyle: {
-                borderWidth : 0
             }
         }
     };
@@ -574,6 +633,8 @@ var echartsConfig = (function (exports) {
         Funnel : Funnel
     };
 
+    window._CHART_THEMETYPE_ = window._CHART_THEMETYPE_ ? window._CHART_THEMETYPE_ : 'light';
+
     /*
      * 合并业务配置 返回一个图表的基础配置
     */
@@ -584,7 +645,7 @@ var echartsConfig = (function (exports) {
             return ;
         }
         const chartType = baseInfo.chartType;
-        const returnConfig = deepCopy( chartConfig[baseInfo.chartType] );
+        const returnConfig = chartConfig[baseInfo.chartType]( baseInfo );
 
         //设置 柱图线图的配置横向纵向
         const lineBarDrections = 'transverse';//横向
@@ -619,9 +680,9 @@ var echartsConfig = (function (exports) {
         if( !returnConfig.color  ){
             //特殊处理漏斗颜色色值
             if( baseInfo.chartType === 'Funnel' ){
-                returnConfig.color = deepCopy( colorConfig.FUNNELCOLORS );
+                returnConfig.color = deepCopy( getColor('dark').FUNNELCOLORS );
             }else{
-                returnConfig.color = deepCopy( colorConfig.COLORS );
+                returnConfig.color = deepCopy( getColor('dark').COLORS );
             }
             
         }
@@ -654,7 +715,7 @@ var echartsConfig = (function (exports) {
      * 3. 字体颜色 FONTCOLOR
     */
     const resetColorConfig = function(type = "",value){
-        const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR'];
+        const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR','FUNNELCOLORS','FUNNELFONTCOLOR'];
         if( !types.includes( type ) ){
             return;
         }
