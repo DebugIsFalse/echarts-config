@@ -6,7 +6,9 @@ var echartsConfig = (function (exports) {
         FONTCOLOR : 'rgba(255,255,255,.55)',
         AXISLINECOLOR : '#324771',
         RADARAREACOLOR : 'rgba(255,255,255,.3)',
-        TREEMAPBREADCOLOR : "rgba(23,35,61,0.75)"
+        TREEMAPBREADCOLOR : "rgba(23,35,61,0.75)",
+        FUNNELCOLORS : ['#E4F3FF','#68B8FF','#2E9AFF','#2A79DC','#2149AB'],
+        FUNNELFONTCOLOR : 'rgba(255,255,255,1)'
     };
 
     const lineBar = {
@@ -78,6 +80,9 @@ var echartsConfig = (function (exports) {
         }
     };
 
+    /*
+     * 饼图
+    */
     const Pie = {
         grid : {
             show: false
@@ -123,6 +128,9 @@ var echartsConfig = (function (exports) {
         }
     };
 
+    /*
+     * 雷达图
+    */
     const Radar = {
         grid : {
             show: false,
@@ -166,6 +174,9 @@ var echartsConfig = (function (exports) {
         }
     };
 
+    /*
+     * 散点图
+    */
     const Scatter = {
         legend : {
             itemHeight: 10,
@@ -224,6 +235,9 @@ var echartsConfig = (function (exports) {
         }
     };
 
+    /*
+     * 矩形树图
+    */
     const TreeMap = {
         series : {
             name: 'brand',
@@ -300,6 +314,48 @@ var echartsConfig = (function (exports) {
                         color : colorConfig.TREEMAPBREADCOLOR
                     }
                 }
+            }
+        }
+    };
+
+    /*
+     * 堆积图
+    */
+    const Funnel = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}"
+        },
+        series : {
+            name:'漏斗图',
+            type:'funnel',
+            left: '10%',
+            top: 20,
+            bottom: 20,
+            width: '80%',
+            min: 0,
+            max: 100,
+            minSize: '0%',
+            maxSize: '100%',
+            sort: 'descending',
+            label: {
+                show: true,
+                position: 'inside',
+                textBorderColor : "rgba(0,0,0,.8)",
+                textShadowOffsetX : 3,
+                textShadowOffsetY : 8,
+                color : colorConfig.FUNNELFONTCOLOR
+            },
+            labelLine: {
+                length: 30,
+                lineStyle: {
+                    width: 1,
+                    type: 'solid',
+                    color : colorConfig.RADARAREACOLOR
+                }
+            },
+            itemStyle: {
+                borderWidth : 0
             }
         }
     };
@@ -472,7 +528,7 @@ var echartsConfig = (function (exports) {
         const legend = [];
         if( config.legend && config.legend.data.length === 0 ){
             
-            if( type === 'Pie' ){
+            if( type === 'Pie' || type === 'Funnel' ){
                 config.series.forEach((it)=>{
                     if( it.data ){
                         it.data.forEach((item)=>{
@@ -514,7 +570,8 @@ var echartsConfig = (function (exports) {
         Pie : Pie,
         Radar : Radar,
         Scatter : Scatter,
-        TreeMap : TreeMap
+        TreeMap : TreeMap,
+        Funnel : Funnel
     };
 
     /*
@@ -560,7 +617,13 @@ var echartsConfig = (function (exports) {
 
         //fill colors
         if( !returnConfig.color  ){
-            returnConfig.color = deepCopy( colorConfig.COLORS );
+            //特殊处理漏斗颜色色值
+            if( baseInfo.chartType === 'Funnel' ){
+                returnConfig.color = deepCopy( colorConfig.FUNNELCOLORS );
+            }else{
+                returnConfig.color = deepCopy( colorConfig.COLORS );
+            }
+            
         }
         //fill legend
         if( returnConfig.legend ){
@@ -591,7 +654,7 @@ var echartsConfig = (function (exports) {
      * 3. 字体颜色 FONTCOLOR
     */
     const resetColorConfig = function(type = "",value){
-        const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR"];
+        const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR'];
         if( !types.includes( type ) ){
             return;
         }

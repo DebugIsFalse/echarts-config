@@ -1,3 +1,6 @@
+/*
+ * 饼图
+*/
 import colorConfig from '../config/color';
 export const Pie = {
     grid : {

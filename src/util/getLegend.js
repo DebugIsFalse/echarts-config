@@ -2,7 +2,7 @@ export const getLegend = function(type,config){
     const legend = [];
     if( config.legend && config.legend.data.length === 0 ){
         
-        if( type === 'Pie' ){
+        if( type === 'Pie' || type === 'Funnel' ){
             config.series.forEach((it)=>{
                 if( it.data ){
                     it.data.forEach((item)=>{

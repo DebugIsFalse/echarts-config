@@ -1,4 +1,7 @@
 
+/*
+ * 线图柱图
+*/
 import colorConfig  from '../config/color';
 export const lineBar = {
     grid : {

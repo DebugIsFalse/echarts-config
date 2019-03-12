@@ -1,3 +1,6 @@
+/*
+ * 矩形树图
+*/
 import colorConfig from '../config/color';
 export  const TreeMap = {
     series : {

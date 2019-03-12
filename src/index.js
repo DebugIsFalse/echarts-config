@@ -4,6 +4,7 @@ import { Pie } from './chart/pie';
 import { Radar } from './chart/radar';
 import { Scatter } from './chart/scatter';
 import { TreeMap } from './chart/treeMap';
+import { Funnel } from './chart/funnel';
 import { deepCopy,merge,isArray } from './util/util';
 import colorConfig from './config/color';
 import { getLegend } from './util/getLegend';
@@ -16,7 +17,8 @@ const chartConfig = {
     Pie : Pie,
     Radar : Radar,
     Scatter : Scatter,
-    TreeMap : TreeMap
+    TreeMap : TreeMap,
+    Funnel : Funnel
 }
 
 /*
@@ -62,7 +64,13 @@ const chartMerge = function(baseInfo = {},config = {}){
 
     //fill colors
     if( !returnConfig.color  ){
-        returnConfig.color = deepCopy( colorConfig.COLORS );
+        //特殊处理漏斗颜色色值
+        if( baseInfo.chartType === 'Funnel' ){
+            returnConfig.color = deepCopy( colorConfig.FUNNELCOLORS );
+        }else{
+            returnConfig.color = deepCopy( colorConfig.COLORS );
+        }
+        
     }
     //fill legend
     if( returnConfig.legend ){
@@ -93,7 +101,7 @@ const insertChartConfig = function( type = "",config = {} ){
  * 3. 字体颜色 FONTCOLOR
 */
 const resetColorConfig = function(type = "",value){
-    const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR"];
+    const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR','FUNNELCOLORS','FUNNELFONTCOLOR'];
     if( !types.includes( type ) ){
         return;
     }
