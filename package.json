@@ -1,8 +1,8 @@
 {
-  "name": "td-chart-config",
+  "name": "echarts-config",
   "version": "0.0.1",
   "description": "talkingdata echart config",
-  "main": "index.js",
+  "main": "./dist/echarts.config.umd.js",
   "scripts": {
     "build": "rollup --config ./build/rollup.config.js",
     "build:umd": "rollup --config ./build/rollup.config.umd.js"

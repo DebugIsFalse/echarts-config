@@ -11,6 +11,8 @@ import { getLegend } from './util/getLegend';
 import { updateTransverse } from './util/updateLineBarTransverse'
 import { updatePieConfig } from './util/updatePieConfig'
 
+import { updateColor } from './config/color';
+
 
 const chartConfig = {
     lineBar : lineBar,
@@ -102,12 +104,12 @@ const insertChartConfig = function( type = "",config = {} ){
  * 2. legend色块 colors
  * 3. 字体颜色 FONTCOLOR
 */
-const resetColorConfig = function(type = "",value){
+const resetColorConfig = function(theme = 'dark',type = "",value){
     const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR','FUNNELCOLORS','FUNNELFONTCOLOR'];
-    if( !types.includes( type ) ){
+    if( !types.includes( type ) || type === '' || !value ){
         return;
     }
-    colorConfig[type] = value;
+    updateColor( theme,type,value );
 }
 
 export { chartMerge, insertChartConfig,resetColorConfig }

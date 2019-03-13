@@ -39,3 +39,7 @@ const defaultsColor = {
 export const getColor = function(type){
     return defaultsColor[type];
 }
+
+export const updateColor = function(theme,type,value){
+    defaultsColor[theme][type] = value;
+}
