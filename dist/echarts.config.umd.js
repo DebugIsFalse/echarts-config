@@ -46,6 +46,10 @@
         return defaultsColor[type];
     };
 
+    const updateColor = function(theme,type,value){
+        defaultsColor[theme][type] = value;
+    };
+
     const types = ['dark','light'];
     const getThemeType = function( config ){
         return types.includes( config.themeType ) > 0 ? config.themeType : window._CHART_THEMETYPE_;
@@ -157,7 +161,13 @@
                 label : {
                     normal: {
                         show: false,
+                        formatter : function(item){
+                            const it = item.data;
+                            const unit = it.unit ? it.unit : '';
+                            return it.name + '\n\n' + it.value + it.unit;
+                        },
                         position: 'center'
+                        
                     },
                     emphasis: {
                         show: true,
@@ -723,12 +733,12 @@
      * 2. legend色块 colors
      * 3. 字体颜色 FONTCOLOR
     */
-    const resetColorConfig = function(type = "",value){
+    const resetColorConfig = function(theme = 'dark',type = "",value){
         const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR','FUNNELCOLORS','FUNNELFONTCOLOR'];
-        if( !types.includes( type ) ){
+        if( !types.includes( type ) || type === '' || !value ){
             return;
         }
-        colorConfig[type] = value;
+        updateColor( theme,type,value );
     };
 
     exports.chartMerge = chartMerge;

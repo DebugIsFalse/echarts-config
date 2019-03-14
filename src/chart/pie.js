@@ -34,7 +34,13 @@ export const Pie = function( config ){
             label : {
                 normal: {
                     show: false,
+                    formatter : function(item){
+                        const it = item.data;
+                        const unit = it.unit ? it.unit : '';
+                        return it.name + '\n\n' + it.value + it.unit;
+                    },
                     position: 'center'
+                    
                 },
                 emphasis: {
                     show: true,
