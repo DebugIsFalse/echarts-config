@@ -5,17 +5,18 @@ var echartsConfig = (function (exports) {
     const FUNNELCOLORS = ['#E4F3FF','#68B8FF','#2E9AFF','#2A79DC','#2149AB'];
     const FUNNELFONTCOLOR = 'rgba(255,255,255,1)';
 
-    const RADARAREACOLOR_DARK = 'rgba(255,255,255,.4)';
-    const FONTCOLOR_DARK = 'rgba(255,255,255,.7)';
-    const AXISLINECOLOR_DARK = '#324771';
+    const RADARAREACOLOR_DARK = 'rgba(255,255,255,.15)';
+    const FONTCOLOR_DARK = 'rgba(255,255,255,.55)';
+    const AXISLINECOLOR_DARK = 'rgba(255,255,255,0.10)';
     const TREEMAPBREADCOLOR_DARK = "rgba(23,35,61,0.75)";
+    const LEGENDCOLOR_DARK = "rgba(255,255,255,.75)";
 
 
-
-    const RADARAREACOLOR_LIGHT = 'rgba(0,0,0,.1)';
+    const RADARAREACOLOR_LIGHT = 'rgba(23,35,61,0.10)';
     const FONTCOLOR_LIGHT = 'rgba(0,0,0,.7)';
-    const AXISLINECOLOR_LIGHT = 'rgba(0,0,0,.08)';
+    const AXISLINECOLOR_LIGHT = 'rgba(23,35,61,0.10)';
     const TREEMAPBREADCOLOR_LIGHT = "rgba(23,35,61,0.75)";
+    const LEGENDCOLOR_LIGHT = ' rgba(23,35,61,0.75)';
 
 
     const defaultsColor = {
@@ -26,7 +27,8 @@ var echartsConfig = (function (exports) {
             RADARAREACOLOR : RADARAREACOLOR_DARK,
             TREEMAPBREADCOLOR : TREEMAPBREADCOLOR_DARK,
             FUNNELCOLORS : FUNNELCOLORS,
-            FUNNELFONTCOLOR : FUNNELFONTCOLOR
+            FUNNELFONTCOLOR : FUNNELFONTCOLOR,
+            LEGENDCOLOR: LEGENDCOLOR_DARK
         },
         light : {
             COLORS : COLORS,
@@ -35,7 +37,8 @@ var echartsConfig = (function (exports) {
             RADARAREACOLOR : RADARAREACOLOR_LIGHT,
             TREEMAPBREADCOLOR : TREEMAPBREADCOLOR_LIGHT,
             FUNNELCOLORS : FUNNELCOLORS,
-            FUNNELFONTCOLOR : FUNNELFONTCOLOR
+            FUNNELFONTCOLOR : FUNNELFONTCOLOR,
+            LEGENDCOLOR : LEGENDCOLOR_LIGHT
         }
     };
 
@@ -51,6 +54,14 @@ var echartsConfig = (function (exports) {
     const getThemeType = function( config ){
         return types.includes( config.themeType ) > 0 ? config.themeType : window._CHART_THEMETYPE_;
     };
+
+    const robotoRegular =  'Roboto-Regular';
+    const PingFangSCRegular = 'PingFangSC-Regular';
+
+    const font12 = '12';
+    const font14 = '14';
+    const font16 = '16';
+    const font20 = '20';
 
     const lineBar = function(config){
         const colorConfig = getColor( getThemeType( config ) );
@@ -72,7 +83,8 @@ var echartsConfig = (function (exports) {
                 itemHeight: 4,
                 textStyle: {
                     padding: [0, 0, 2, 3],
-                    color: colorConfig.FONTCOLOR
+                    color: colorConfig.LEGENDCOLOR,
+                    fontFamily : PingFangSCRegular
                 },
                 borderRadius : 4,
                 data: []
@@ -96,7 +108,8 @@ var echartsConfig = (function (exports) {
                     }
                 },
                 axisLabel: {
-                    color : colorConfig.FONTCOLOR
+                    color : colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
                 }
             },
             yAxis : {
@@ -115,10 +128,11 @@ var echartsConfig = (function (exports) {
                     }
                 },
                 axisTick: {
-                    show: true
+                    show: false
                 },
                 axisLabel: {
-                    color: colorConfig.FONTCOLOR
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
                 }
             }
         };
@@ -142,13 +156,14 @@ var echartsConfig = (function (exports) {
                 orient: 'vertical',
                 textStyle: {
                     padding: [0, 0, 3, 3],
-                    color: colorConfig.FONTCOLOR
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily : PingFangSCRegular
                 },
                 data: []
             },
             tooltip : {
                 show: false,
-                trigger: 'axis'
+                trigger: 'item'
             },
             series : {
                 type: 'pie',
@@ -161,7 +176,7 @@ var echartsConfig = (function (exports) {
                         formatter : function(item){
                             const it = item.data;
                             const unit = it.unit ? it.unit : '';
-                            return it.name + '\n\n' + it.value + it.unit;
+                            return it.name + '\n\n' + it.value + unit;
                         },
                         position: 'center'
                         
@@ -170,12 +185,11 @@ var echartsConfig = (function (exports) {
                         show: true,
                         textStyle: {
                             fontSize: '16',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            fontFamily : robotoRegular
                         }
                     }
                 },
-                //center: ['30%', '50%'],
-                //是否启用防止标签重叠策略，默认开启，在标签拥挤重叠的情况下会挪动各个标签的位置，防止标签间的重叠。如果不需要开启该策略，例如圆环图这个例子中需要强制所有标签放在中心位置，可以将该值设为 false
                 avoidLabelOverlap: false,
                 data: []
             }
@@ -199,7 +213,8 @@ var echartsConfig = (function (exports) {
                 padding :[15,5],
                 textStyle: {
                     padding: [0, 0, 3, 3],
-                    color: colorConfig.FONTCOLOR
+                    color: colorConfig.LEGENDCOLOR,
+                    fontFamily : PingFangSCRegular
                 },
                 data: []
             },
@@ -212,7 +227,8 @@ var echartsConfig = (function (exports) {
                 center: ['50%', '53%'],
                 name : {
                     textStyle : {
-                        color : colorConfig.FONTCOLOR
+                        color : colorConfig.FONTCOLOR,
+                        fontFamily : robotoRegular
                     }
                 },
                 splitArea : {
@@ -251,6 +267,7 @@ var echartsConfig = (function (exports) {
                 padding :[10,5],
                 textStyle: {
                     padding: [0, 0, 3, 3],
+                    fontFamily : PingFangSCRegular,
                     color: colorConfig.FONTCOLOR
                 },
                 data: []
@@ -278,7 +295,8 @@ var echartsConfig = (function (exports) {
                     show: false,
                 },
                 axisLabel: {
-                    color : colorConfig.FONTCOLOR
+                    color : colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
                 }
             },
             yAxis : {
@@ -296,7 +314,8 @@ var echartsConfig = (function (exports) {
                     show: false
                 },
                 axisLabel: {
-                    color: colorConfig.FONTCOLOR
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
                 }
             }
         };
@@ -315,13 +334,15 @@ var echartsConfig = (function (exports) {
                     rich : {
                         name : {
                             color : "#fff",
-                            fontSize : 12,
+                            fontSize : font12,
+                            fontFamily : PingFangSCRegular
                         },
                         des : {
                             color : "#fff",
                             height : 30,
                             padding : [10,0,0,14],
-                            fontSize : 20
+                            fontSize : font20,
+                            fontFamily : PingFangSCRegular
                         }
                     }
                 },
@@ -349,7 +370,7 @@ var echartsConfig = (function (exports) {
                             emphasis: {
                                 position: [10, 10],
                                 textStyle: {
-                                    fontSize: 16
+                                    fontSize: font16
                                 }
                             }
                         },
@@ -364,12 +385,12 @@ var echartsConfig = (function (exports) {
                         label: {
                             normal: {
                                 textStyle: {
-                                    fontSize: 14
+                                    fontSize: font14
                                 }
                             },
                             emphasis: {
                                 textStyle: {
-                                    fontSize: 14
+                                    fontSize: font14
                                 }
                             }
                         }
@@ -625,6 +646,8 @@ var echartsConfig = (function (exports) {
         config.xAxis.type = "value";
         config.yAxis.splitLine.show = false;
         config.xAxis.splitLine.show = true;
+        config.yAxis.axisLabel.fontSize = font14;
+        config.yAxis.axisLabel.color = getColor('dark').FUNNELFONTCOLOR;
     };
 
     const updatePieConfig = function(config,returnConfig){

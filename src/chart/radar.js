@@ -3,6 +3,10 @@
 */
 import { getColor}  from '../config/color';
 import { getThemeType } from '../config/theme';
+import { 
+    PingFangSCRegular,
+    robotoRegular
+ } from '../config/labelStyle';
 
 export const Radar = function( config ){
     const colorConfig = getColor( getThemeType( config ) );
@@ -17,7 +21,8 @@ export const Radar = function( config ){
             padding :[15,5],
             textStyle: {
                 padding: [0, 0, 3, 3],
-                color: colorConfig.FONTCOLOR
+                color: colorConfig.LEGENDCOLOR,
+                fontFamily : PingFangSCRegular
             },
             data: []
         },
@@ -30,7 +35,8 @@ export const Radar = function( config ){
             center: ['50%', '53%'],
             name : {
                 textStyle : {
-                    color : colorConfig.FONTCOLOR
+                    color : colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
                 }
             },
             splitArea : {

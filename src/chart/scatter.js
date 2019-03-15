@@ -3,6 +3,10 @@
 */
 import { getColor }  from '../config/color';
 import { getThemeType } from '../config/theme';
+import { 
+    PingFangSCRegular,
+    robotoRegular
+ } from '../config/labelStyle';
 
 export const Scatter = function( config ){
     const colorConfig = getColor( getThemeType( config ) );
@@ -14,6 +18,7 @@ export const Scatter = function( config ){
             padding :[10,5],
             textStyle: {
                 padding: [0, 0, 3, 3],
+                fontFamily : PingFangSCRegular,
                 color: colorConfig.FONTCOLOR
             },
             data: []
@@ -41,7 +46,8 @@ export const Scatter = function( config ){
                 show: false,
             },
             axisLabel: {
-                color : colorConfig.FONTCOLOR
+                color : colorConfig.FONTCOLOR,
+                fontFamily : robotoRegular
             }
         },
         yAxis : {
@@ -59,7 +65,8 @@ export const Scatter = function( config ){
                 show: false
             },
             axisLabel: {
-                color: colorConfig.FONTCOLOR
+                color: colorConfig.FONTCOLOR,
+                fontFamily : robotoRegular
             }
         }
     };

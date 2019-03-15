@@ -3,6 +3,11 @@
 */
 import { getColor }  from '../config/color';
 import { getThemeType } from '../config/theme';
+import { 
+    font12,font14,font16,font20,
+    robotoRegular,
+    PingFangSCRegular
+} from '../config/labelStyle'
 
 export  const TreeMap = function( config ){
     const colorConfig = getColor( getThemeType( config ) );
@@ -13,13 +18,15 @@ export  const TreeMap = function( config ){
                 rich : {
                     name : {
                         color : "#fff",
-                        fontSize : 12,
+                        fontSize : font12,
+                        fontFamily : PingFangSCRegular
                     },
                     des : {
                         color : "#fff",
                         height : 30,
                         padding : [10,0,0,14],
-                        fontSize : 20
+                        fontSize : font20,
+                        fontFamily : PingFangSCRegular
                     }
                 }
             },
@@ -47,7 +54,7 @@ export  const TreeMap = function( config ){
                         emphasis: {
                             position: [10, 10],
                             textStyle: {
-                                fontSize: 16
+                                fontSize: font16
                             }
                         }
                     },
@@ -62,12 +69,12 @@ export  const TreeMap = function( config ){
                     label: {
                         normal: {
                             textStyle: {
-                                fontSize: 14
+                                fontSize: font14
                             }
                         },
                         emphasis: {
                             textStyle: {
-                                fontSize: 14
+                                fontSize: font14
                             }
                         }
                     }

@@ -4,6 +4,10 @@
 */
 import { getColor }  from '../config/color';
 import { getThemeType } from '../config/theme';
+import { 
+    PingFangSCRegular,
+    robotoRegular
+ } from '../config/labelStyle';
 
 export const lineBar = function(config){
     const colorConfig = getColor( getThemeType( config ) );
@@ -25,7 +29,8 @@ export const lineBar = function(config){
             itemHeight: 4,
             textStyle: {
                 padding: [0, 0, 2, 3],
-                color: colorConfig.FONTCOLOR
+                color: colorConfig.LEGENDCOLOR,
+                fontFamily : PingFangSCRegular
             },
             borderRadius : 4,
             data: []
@@ -49,7 +54,8 @@ export const lineBar = function(config){
                 }
             },
             axisLabel: {
-                color : colorConfig.FONTCOLOR
+                color : colorConfig.FONTCOLOR,
+                fontFamily : robotoRegular
             }
         },
         yAxis : {
@@ -68,10 +74,11 @@ export const lineBar = function(config){
                 }
             },
             axisTick: {
-                show: true
+                show: false
             },
             axisLabel: {
-                color: colorConfig.FONTCOLOR
+                color: colorConfig.FONTCOLOR,
+                fontFamily : robotoRegular
             }
         }
     };
