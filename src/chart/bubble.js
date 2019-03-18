@@ -4,18 +4,19 @@
 import { getColor }  from '../config/color';
 import { getThemeType } from '../config/theme';
 import { PingFangSCRegular,robotoRegular } from '../config/labelStyle';
+import { deepCopy } from '../util/util'
 
 const itemStyle = {
     normal: {
-        opacity: 0.6,
-        shadowBlur: 10,
-        shadowOffsetX: 0,
-        shadowOffsetY: 0,
+        opacity: 1,
+        borderWidth : 1,
+        borderType : 'solid',
         shadowColor: 'rgba(0, 0, 0, 0.5)'
     }
 };
 export const Bubble = function( config ){
     const colorConfig = getColor( getThemeType( config ) );
+
     return {
         legend : {
             itemHeight: 10,
@@ -35,7 +36,7 @@ export const Bubble = function( config ){
         },
         series : {
             type: 'scatter',
-            itemStyle,
+            itemStyle: deepCopy( itemStyle ),
             data: []
         },
         xAxis : {
@@ -82,7 +83,7 @@ export const Bubble = function( config ){
             show : false,
             pieces : [],
             inRange: {
-                symbolSize: [5,50]
+                symbolSize: [10,60]
             }
         }
     }

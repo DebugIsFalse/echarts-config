@@ -1,7 +1,8 @@
+import { COLORS } from '../config/color';
 export const getLegend = function(type,config){
     const legend = [];
     if( config.legend && config.legend.data.length === 0 ){
-        const charts = ['Pie','Funnel','Bubble'];
+        const charts = ['Pie','Funnel'];
         if( charts.includes( type ) ){
             config.series.forEach((it)=>{
                 if( it.data ){
@@ -11,10 +12,10 @@ export const getLegend = function(type,config){
                 }
             }) 
         }else{
-            config.series.forEach((it)=>{
+            config.series.forEach((it,index)=>{
                 it.name && legend.push(it.name)
             }) 
         }
     }
-
+    return legend;
 }

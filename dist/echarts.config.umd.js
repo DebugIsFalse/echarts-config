@@ -459,93 +459,6 @@
         }
     };
 
-    /*
-     * 堆积图
-    */
-
-    const itemStyle = {
-        normal: {
-            opacity: 0.6,
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-    };
-    const Bubble = function( config ){
-        const colorConfig = getColor( getThemeType( config ) );
-        return {
-            legend : {
-                itemHeight: 10,
-                itemWidth: 10,
-                orient: 'horizontal',
-                padding :[10,5],
-                textStyle: {
-                    padding: [0, 0, 3, 3],
-                    fontFamily : PingFangSCRegular,
-                    color: colorConfig.FONTCOLOR
-                },
-                data: []
-            },
-            tooltip : {
-                show: true,
-                trigger: 'axis'
-            },
-            series : {
-                type: 'scatter',
-                itemStyle,
-                data: []
-            },
-            xAxis : {
-                boundaryGap:["0","23%"],
-                axisLine: {
-                    show: true,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
-                    }
-                },
-                axisTick: {
-                    show: false
-                },
-                splitLine: {
-                    show: false,
-                },
-                axisLabel: {
-                    color : colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
-                }
-            },
-            yAxis : {
-                boundaryGap:["0","23%"],
-                axisLine: {
-                    show: true,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
-                    }
-                },
-                splitLine : {
-                    show : false
-                },
-                axisTick: {
-                    show: false
-                },
-                axisLabel: {
-                    color: colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
-                }
-            },
-            visualMap : {
-                top: '10%',
-                dimension: 2,
-                show : false,
-                pieces : [],
-                inRange: {
-                    symbolSize: [5,50]
-                }
-            }
-        }
-    };
-
     var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
     function createCommonjsModule(fn, module) {
@@ -710,10 +623,97 @@
         });
     }
 
+    /*
+     * 堆积图
+    */
+
+    const itemStyle = {
+        normal: {
+            opacity: 1,
+            borderWidth : 1,
+            borderType : 'solid',
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+    };
+    const Bubble = function( config ){
+        const colorConfig = getColor( getThemeType( config ) );
+
+        return {
+            legend : {
+                itemHeight: 10,
+                itemWidth: 10,
+                orient: 'horizontal',
+                padding :[10,5],
+                textStyle: {
+                    padding: [0, 0, 3, 3],
+                    fontFamily : PingFangSCRegular,
+                    color: colorConfig.FONTCOLOR
+                },
+                data: []
+            },
+            tooltip : {
+                show: true,
+                trigger: 'axis'
+            },
+            series : {
+                type: 'scatter',
+                itemStyle: deepCopy( itemStyle ),
+                data: []
+            },
+            xAxis : {
+                boundaryGap:["0","23%"],
+                axisLine: {
+                    show: true,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: false,
+                },
+                axisLabel: {
+                    color : colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
+                }
+            },
+            yAxis : {
+                boundaryGap:["0","23%"],
+                axisLine: {
+                    show: true,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                splitLine : {
+                    show : false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
+                }
+            },
+            visualMap : {
+                top: '10%',
+                dimension: 2,
+                show : false,
+                pieces : [],
+                inRange: {
+                    symbolSize: [10,60]
+                }
+            }
+        }
+    };
+
     const getLegend = function(type,config){
         const legend = [];
         if( config.legend && config.legend.data.length === 0 ){
-            const charts = ['Pie','Funnel','Bubble'];
+            const charts = ['Pie','Funnel'];
             if( charts.includes( type ) ){
                 config.series.forEach((it)=>{
                     if( it.data ){
@@ -723,12 +723,12 @@
                     }
                 }); 
             }else{
-                config.series.forEach((it)=>{
+                config.series.forEach((it,index)=>{
                     it.name && legend.push(it.name);
                 }); 
             }
         }
-
+        return legend;
     };
 
     const updateTransverse = function(config){
@@ -751,6 +751,16 @@
             returnConfig.series.label.emphasis.show = false;
             returnConfig.tooltip.show = true;
         }
+    };
+
+    const updateBubbleColor = function( config,index ){
+        const reg = /\,1\)/g;
+        const color = COLORS[index];
+        const color25 = color.replace(reg,',.25)');
+        config.itemStyle = config.itemStyle || {};
+        config.itemStyle.normal= config.itemStyle.normal || {};
+        config.itemStyle.normal.color = color25;
+        config.itemStyle.normal.borderColor = color;
     };
 
     const chartUtil = {
@@ -804,7 +814,12 @@
                 let storeConfig = deepCopy( returnConfig[i] );
                 if( isArray( citem ) ){
                     returnConfig[i] = [];
-                    citem.forEach((it)=>{
+                    citem.forEach((it,index)=>{
+
+                        //处理气泡图
+                        if( i === 'series' && chartType === 'Bubble' ){
+                            updateBubbleColor( storeConfig,index );
+                        }
                         returnConfig[i].push( merge( storeConfig,it ) );
                     });
                 }else{

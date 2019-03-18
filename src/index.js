@@ -12,6 +12,7 @@ import { getColor } from './config/color';
 import { getLegend } from './util/getLegend';
 import { updateTransverse } from './util/updateLineBarTransverse'
 import { updatePieConfig } from './util/updatePieConfig'
+import { updateBubbleColor } from './util/updateBubbleColor';
 
 import { updateColor } from './config/color';
 import chartUtil from './util/chartUtil';
@@ -59,7 +60,12 @@ const chartMerge = function(baseInfo = {},config = {}){
             let storeConfig = deepCopy( returnConfig[i] );
             if( isArray( citem ) ){
                 returnConfig[i] = [];
-                citem.forEach((it)=>{
+                citem.forEach((it,index)=>{
+
+                    //处理气泡图
+                    if( i === 'series' && chartType === 'Bubble' ){
+                        updateBubbleColor( storeConfig,index )
+                    }
                     returnConfig[i].push( merge( storeConfig,it ) )
                 })
             }else{
