@@ -459,6 +459,93 @@
         }
     };
 
+    /*
+     * 堆积图
+    */
+
+    const itemStyle = {
+        normal: {
+            opacity: 0.6,
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+    };
+    const Bubble = function( config ){
+        const colorConfig = getColor( getThemeType( config ) );
+        return {
+            legend : {
+                itemHeight: 10,
+                itemWidth: 10,
+                orient: 'horizontal',
+                padding :[10,5],
+                textStyle: {
+                    padding: [0, 0, 3, 3],
+                    fontFamily : PingFangSCRegular,
+                    color: colorConfig.FONTCOLOR
+                },
+                data: []
+            },
+            tooltip : {
+                show: true,
+                trigger: 'axis'
+            },
+            series : {
+                type: 'scatter',
+                itemStyle,
+                data: []
+            },
+            xAxis : {
+                boundaryGap:["0","23%"],
+                axisLine: {
+                    show: true,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+                splitLine: {
+                    show: false,
+                },
+                axisLabel: {
+                    color : colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
+                }
+            },
+            yAxis : {
+                boundaryGap:["0","23%"],
+                axisLine: {
+                    show: true,
+                    lineStyle : {
+                        color : colorConfig.AXISLINECOLOR
+                    }
+                },
+                splitLine : {
+                    show : false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily : robotoRegular
+                }
+            },
+            visualMap : {
+                top: '10%',
+                dimension: 2,
+                show : false,
+                pieces : [],
+                inRange: {
+                    symbolSize: [5,50]
+                }
+            }
+        }
+    };
+
     var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
     function createCommonjsModule(fn, module) {
@@ -626,8 +713,8 @@
     const getLegend = function(type,config){
         const legend = [];
         if( config.legend && config.legend.data.length === 0 ){
-            
-            if( type === 'Pie' || type === 'Funnel' ){
+            const charts = ['Pie','Funnel','Bubble'];
+            if( charts.includes( type ) ){
                 config.series.forEach((it)=>{
                     if( it.data ){
                         it.data.forEach((item)=>{
@@ -666,13 +753,23 @@
         }
     };
 
+    const chartUtil = {
+        //气泡图分段处理
+        bubbleLayered( data,options = {} ){
+            if( !options.size ){
+                return;
+            }
+        }
+    };
+
     const chartConfig = {
         lineBar : lineBar,
         Pie : Pie,
         Radar : Radar,
         Scatter : Scatter,
         TreeMap : TreeMap,
-        Funnel : Funnel
+        Funnel : Funnel,
+        Bubble : Bubble
     };
 
     window._CHART_THEMETYPE_ = window._CHART_THEMETYPE_ ? window._CHART_THEMETYPE_ : 'light';
@@ -743,7 +840,7 @@
 
     */
 
-    const insertChartConfig = function( type = "",config = {} ){
+    const insertChartConfig = function( type = "",config = Function ){
         if( type === "" ){
             return;
         }
@@ -767,6 +864,7 @@
     exports.chartMerge = chartMerge;
     exports.insertChartConfig = insertChartConfig;
     exports.resetColorConfig = resetColorConfig;
+    exports.chartUtil = chartUtil;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

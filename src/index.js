@@ -5,6 +5,8 @@ import { Radar } from './chart/radar';
 import { Scatter } from './chart/scatter';
 import { TreeMap } from './chart/treeMap';
 import { Funnel } from './chart/funnel';
+import { Bubble } from './chart/bubble';
+
 import { deepCopy,merge,isArray } from './util/util';
 import { getColor } from './config/color';
 import { getLegend } from './util/getLegend';
@@ -12,6 +14,7 @@ import { updateTransverse } from './util/updateLineBarTransverse'
 import { updatePieConfig } from './util/updatePieConfig'
 
 import { updateColor } from './config/color';
+import chartUtil from './util/chartUtil';
 
 
 const chartConfig = {
@@ -20,7 +23,8 @@ const chartConfig = {
     Radar : Radar,
     Scatter : Scatter,
     TreeMap : TreeMap,
-    Funnel : Funnel
+    Funnel : Funnel,
+    Bubble : Bubble
 }
 
 window._CHART_THEMETYPE_ = window._CHART_THEMETYPE_ ? window._CHART_THEMETYPE_ : 'light';
@@ -91,7 +95,7 @@ const chartMerge = function(baseInfo = {},config = {}){
 
 */
 
-const insertChartConfig = function( type = "",config = {} ){
+const insertChartConfig = function( type = "",config = Function ){
     if( type === "" ){
         return;
     }
@@ -112,4 +116,13 @@ const resetColorConfig = function(theme = 'dark',type = "",value){
     updateColor( theme,type,value );
 }
 
-export { chartMerge, insertChartConfig,resetColorConfig }
+export { 
+    //合并基础配置项
+    chartMerge, 
+    //添加chart类型和重置chart类型
+    insertChartConfig,
+    //重置色系
+    resetColorConfig,
+    //chart的工具方法
+    chartUtil
+}

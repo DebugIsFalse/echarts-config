@@ -1,8 +1,8 @@
 export const getLegend = function(type,config){
     const legend = [];
     if( config.legend && config.legend.data.length === 0 ){
-        
-        if( type === 'Pie' || type === 'Funnel' ){
+        const charts = ['Pie','Funnel','Bubble'];
+        if( charts.includes( type ) ){
             config.series.forEach((it)=>{
                 if( it.data ){
                     it.data.forEach((item)=>{
