@@ -737,7 +737,7 @@
         config.yAxis.splitLine.show = false;
         config.xAxis.splitLine.show = true;
         config.yAxis.axisLabel.fontSize = font14;
-        config.yAxis.axisLabel.color = getColor('dark').FUNNELFONTCOLOR;
+        config.yAxis.axisLabel.color = getColor( getThemeType(config) ).FONTCOLOR;
     };
 
     const updatePieConfig = function(config,returnConfig){
