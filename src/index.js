@@ -114,8 +114,8 @@ const insertChartConfig = function( type = "",config = Function ){
  * 2. legend色块 colors
  * 3. 字体颜色 FONTCOLOR
 */
-const resetColorConfig = function(theme = 'dark',type = "",value){
-    const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR','FUNNELCOLORS','FUNNELFONTCOLOR'];
+const resetColorConfig = function(theme = 'light',type = "",value){
+    const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR','FUNNELCOLORS','FUNNELFONTCOLOR','LEGENDCOLOR'];
     if( !types.includes( type ) || type === '' || !value ){
         return;
     }
