@@ -1,6 +1,6 @@
 {
   "name": "echarts-config",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "talkingdata echart config",
   "main": "./dist/echarts.config.umd.js",
   "scripts": {
