@@ -707,23 +707,25 @@ var echartsConfig = (function (exports) {
         }
     };
 
-    const getLegend = function(type,config){
-        const legend = [];
-        if( config.legend && config.legend.data.length === 0 ){
-            const charts = ['Pie','Funnel'];
-            if( charts.includes( type ) ){
-                config.series.forEach((it)=>{
-                    if( it.data ){
-                        it.data.forEach((item)=>{
+    const getLegend = function (type, config) {
+        let legend = [];
+        if (config.legend && config.legend.data.length === 0) {
+            const charts = ['Pie', 'Funnel'];
+            if (charts.includes(type)) {
+                config.series.forEach((it) => {
+                    if (it.data) {
+                        it.data.forEach((item) => {
                             item.name && legend.push(item.name);
                         });
                     }
-                }); 
-            }else{
-                config.series.forEach((it,index)=>{
+                });
+            } else {
+                config.series.forEach((it, index) => {
                     it.name && legend.push(it.name);
-                }); 
+                });
             }
+        } else {
+            legend = config.legend.data;
         }
         return legend;
     };
@@ -770,76 +772,76 @@ var echartsConfig = (function (exports) {
     };
 
     const chartConfig = {
-        lineBar : lineBar,
-        Pie : Pie,
-        Radar : Radar,
-        Scatter : Scatter,
-        TreeMap : TreeMap,
-        Funnel : Funnel,
-        Bubble : Bubble
+        lineBar: lineBar,
+        Pie: Pie,
+        Radar: Radar,
+        Scatter: Scatter,
+        TreeMap: TreeMap,
+        Funnel: Funnel,
+        Bubble: Bubble
     };
 
     window._CHART_THEMETYPE_ = window._CHART_THEMETYPE_ ? window._CHART_THEMETYPE_ : 'light';
 
     /*
      * 合并业务配置 返回一个图表的基础配置
-    */
+     */
 
-    const chartMerge = function(baseInfo = {},config = {}){
-        
-        if( Object.keys( baseInfo ).length === 0 ){
-            return ;
+    const chartMerge = function (baseInfo = {}, config = {}) {
+
+        if (Object.keys(baseInfo).length === 0) {
+            return;
         }
         const chartType = baseInfo.chartType;
-        const returnConfig = chartConfig[baseInfo.chartType]( baseInfo );
+        const returnConfig = chartConfig[baseInfo.chartType](baseInfo);
 
         //设置 柱图线图的配置横向纵向
-        const lineBarDrections = 'transverse';//横向
-        if( chartType === 'lineBar' && lineBarDrections === baseInfo.direction ){
+        const lineBarDrections = 'transverse'; //横向
+        if (chartType === 'lineBar' && lineBarDrections === baseInfo.direction) {
             updateTransverse(returnConfig);
         }
         //设置pie图如果全满隐藏显示中间区域显示tooltip
-        if( chartType === 'Pie' ){
-            updatePieConfig( config,returnConfig );
+        if (chartType === 'Pie') {
+            updatePieConfig(config, returnConfig);
         }
 
         //fill base type
-        for( let i in config ){
+        for (let i in config) {
             let item = returnConfig[i];
             let citem = config[i];
-            if( item ){
-                let storeConfig = deepCopy( returnConfig[i] );
-                if( isArray( citem ) ){
+            if (item) {
+                let storeConfig = deepCopy(returnConfig[i]);
+                if (isArray(citem)) {
                     returnConfig[i] = [];
-                    citem.forEach((it,index)=>{
+                    citem.forEach((it, index) => {
 
                         //处理气泡图
-                        if( i === 'series' && chartType === 'Bubble' ){
-                            updateBubbleColor( storeConfig,index );
+                        if (i === 'series' && chartType === 'Bubble') {
+                            updateBubbleColor(storeConfig, index);
                         }
-                        returnConfig[i].push( merge( storeConfig,it ) );
+                        returnConfig[i].push(merge(storeConfig, it));
                     });
-                }else{
-                    returnConfig[i] = merge( storeConfig,citem );
+                } else {
+                    returnConfig[i] = merge(storeConfig, citem);
                 }
-            }else{
-                returnConfig[i] = deepCopy( citem );
+            } else {
+                returnConfig[i] = deepCopy(citem);
             }
         }
 
         //fill colors
-        if( !returnConfig.color  ){
+        if (!returnConfig.color) {
             //特殊处理漏斗颜色色值
-            if( baseInfo.chartType === 'Funnel' ){
-                returnConfig.color = deepCopy( getColor('dark').FUNNELCOLORS );
-            }else{
-                returnConfig.color = deepCopy( getColor('dark').COLORS );
+            if (baseInfo.chartType === 'Funnel') {
+                returnConfig.color = deepCopy(getColor('dark').FUNNELCOLORS);
+            } else {
+                returnConfig.color = deepCopy(getColor('dark').COLORS);
             }
-            
+
         }
         //fill legend
-        if( returnConfig.legend ){
-            returnConfig.legend.data = getLegend( baseInfo.chartType,returnConfig );
+        if (returnConfig.legend && returnConfig.legend.data && returnConfig.legend.data.length !== 0) {
+            returnConfig.legend.data = getLegend(baseInfo.chartType, returnConfig);
         }
 
         return returnConfig;
@@ -852,8 +854,8 @@ var echartsConfig = (function (exports) {
 
     */
 
-    const insertChartConfig = function( type = "",config = Function ){
-        if( type === "" ){
+    const insertChartConfig = function (type = "", config = Function) {
+        if (type === "") {
             return;
         }
         chartConfig[type] = config;
@@ -864,13 +866,13 @@ var echartsConfig = (function (exports) {
      * 1. 线条颜色 axisLineColor
      * 2. legend色块 colors
      * 3. 字体颜色 FONTCOLOR
-    */
-    const resetColorConfig = function(theme = 'dark',type = "",value){
-        const types = ["COLORS", "FONTCOLOR","AXISLINECOLOR",'RADARAREACOLOR','TREEMAPBREADCOLOR','FUNNELCOLORS','FUNNELFONTCOLOR'];
-        if( !types.includes( type ) || type === '' || !value ){
+     */
+    const resetColorConfig = function (theme = 'light', type = "", value) {
+        const types = ["COLORS", "FONTCOLOR", "AXISLINECOLOR", 'RADARAREACOLOR', 'TREEMAPBREADCOLOR', 'FUNNELCOLORS', 'FUNNELFONTCOLOR', 'LEGENDCOLOR'];
+        if (!types.includes(type) || type === '' || !value) {
             return;
         }
-        updateColor( theme,type,value );
+        updateColor(theme, type, value);
     };
 
     exports.chartMerge = chartMerge;
