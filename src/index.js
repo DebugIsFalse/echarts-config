@@ -116,7 +116,7 @@ const chartMerge = function (baseInfo = {}, config = {}) {
 
     }
     //fill legend
-    if (returnConfig.legend && returnConfig.legend.data && returnConfig.legend.data.length !== 0) {
+    if (returnConfig.legend && returnConfig.legend.data && returnConfig.legend.data.length === 0) {
         returnConfig.legend.data = getLegend(baseInfo.chartType, returnConfig);
     }
 

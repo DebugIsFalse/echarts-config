@@ -1,61 +1,105 @@
 <!doctype html>
 <html lang='zh-CN'>
-<head>
-<title>饼图</title>
-<meta charset='utf-8'>
-<meta name='viewport' content='width=device-width'>
-<link href="./css/css.css" rel="stylesheet">
-</head>
-<body>
-    <div class="echarts-line echarts-line1"></div>
-    <div class="echarts-line echarts-line2"></div>
-    <div class="theme-button">dark</div>
-    <script type="text/javascript" src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
-    <script src="../dist/echarts.config.js"></script>
-    <script src="./js/changeTheme.js"></script>
-    <script>
-        const { chartMerge,insertChartConfig,resetColorConfig } = echartsConfig;
 
-        var initChart = function( type ){
-            //初始化设置主题 dark light
-            window._CHART_THEMETYPE_ = type;
+    <head>
+        <title>饼图</title>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width'>
+        <link href="./css/css.css" rel="stylesheet">
+    </head>
 
-            //echarts1
-            const echarts1 = chartMerge({ chartType : 'Pie' },{
-                series : [{
-                    data: [
-                        {value:335, name:'直接访问',unit : '千万'},
-                        {value:310, name:'邮件营销',unit : '千万'},
-                        {value:234, name:'联盟广告',unit : '千万'},
-                        {value:135, name:'视频广告',unit : '千万'},
-                        {value:1548, name:'搜索引擎',unit : '千万'}
-                    ]
-                }]
-            });
-            const echarts1Elem = window.echarts.init( document.querySelector('.echarts-line1') );
-            console.log(echarts1)
-            echarts1Elem.setOption( echarts1 );
+    <body>
+        <div class="echarts-line echarts-line1"></div>
+        <div class="echarts-line echarts-line2"></div>
+        <div class="theme-button">dark</div>
+        <script type="text/javascript"
+            src="https://echarts.baidu.com/examples/vendors/echarts/echarts.min.js?_v_=1548453451319"></script>
+        <script src="../dist/echarts.config.js?t=1"></script>
+        <script src="./js/changeTheme.js"></script>
+        <script>
+            const {
+                chartMerge,
+                insertChartConfig,
+                resetColorConfig
+            } = echartsConfig;
+
+            var initChart = function (type) {
+                //初始化设置主题 dark light
+                window._CHART_THEMETYPE_ = type;
+
+                //echarts1
+                const echarts1 = chartMerge({
+                    chartType: 'Pie'
+                }, {
+                    series: [{
+                        data: [{
+                                value: 335,
+                                name: '直接访问',
+                                unit: '千万'
+                            },
+                            {
+                                value: 310,
+                                name: '邮件营销',
+                                unit: '千万'
+                            },
+                            {
+                                value: 234,
+                                name: '联盟广告',
+                                unit: '千万'
+                            },
+                            {
+                                value: 135,
+                                name: '视频广告',
+                                unit: '千万'
+                            },
+                            {
+                                value: 1548,
+                                name: '搜索引擎',
+                                unit: '千万'
+                            }
+                        ]
+                    }]
+                });
+                const echarts1Elem = window.echarts.init(document.querySelector('.echarts-line1'));
+                console.log(echarts1)
+                echarts1Elem.setOption(echarts1);
 
 
-            //echarts2
-            const echarts2 = chartMerge({ chartType : 'Pie' },{
-                series : [{
-                    radius : ['0','75%'],
-                    data: [
-                        {value:335, name:'直接访问'},
-                        {value:310, name:'邮件营销'},
-                        {value:234, name:'联盟广告'},
-                        {value:135, name:'视频广告'},
-                        {value:1548, name:'搜索引擎'}
-                    ]
-                }]
-            });
-            const echarts2Elem = window.echarts.init( document.querySelector('.echarts-line2') );
-            console.log(echarts2)
-            echarts2Elem.setOption( echarts2 );
-        }
-        initChart('dark');
+                //echarts2
+                const echarts2 = chartMerge({
+                    chartType: 'Pie'
+                }, {
+                    series: [{
+                        radius: ['0', '75%'],
+                        data: [{
+                                value: 335,
+                                name: '直接访问'
+                            },
+                            {
+                                value: 310,
+                                name: '邮件营销'
+                            },
+                            {
+                                value: 234,
+                                name: '联盟广告'
+                            },
+                            {
+                                value: 135,
+                                name: '视频广告'
+                            },
+                            {
+                                value: 1548,
+                                name: '搜索引擎'
+                            }
+                        ]
+                    }]
+                });
+                const echarts2Elem = window.echarts.init(document.querySelector('.echarts-line2'));
+                console.log(echarts2)
+                echarts2Elem.setOption(echarts2);
+            }
+            initChart('dark');
+        </script>
+    </body>
 
-    </script>
-</body>
 </html>
