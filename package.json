@@ -1,21 +1,21 @@
 {
-  "name": "echarts-config",
-  "version": "0.1.0",
-  "description": "talkingdata echart config",
-  "main": "./dist/echarts.config.umd.js",
-  "scripts": {
-    "build": "rollup --config ./build/rollup.config.js",
-    "build:umd": "rollup --config ./build/rollup.config.umd.js"
-  },
-  "author": "mod",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DebugIsFalse/echarts-config"
-  },
-  "devDependencies": {
-    "deepmerge": "^3.2.0",
-    "rollup-plugin-commonjs": "^9.2.1",
-    "rollup-plugin-node-resolve": "^4.0.1"
-  }
+    "name": "echarts-config",
+    "version": "0.1.1",
+    "description": "talkingdata echart config",
+    "main": "./dist/echarts.config.umd.js",
+    "scripts": {
+        "build": "rollup --config ./build/rollup.config.js",
+        "build:umd": "rollup --config ./build/rollup.config.umd.js"
+    },
+    "author": "mod",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DebugIsFalse/echarts-config"
+    },
+    "devDependencies": {
+        "deepmerge": "^3.2.0",
+        "rollup-plugin-commonjs": "^9.2.1",
+        "rollup-plugin-node-resolve": "^4.0.1"
+    }
 }
