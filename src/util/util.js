@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 
-export const isArray = function( data ){
-    return Array.isArray( data );
+export const isArray = function (data) {
+    return Array.isArray(data);
 }
 
 export const typeOf = function (obj) {

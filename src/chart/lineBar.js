@@ -1,47 +1,50 @@
-
 /*
  * 线图柱图
-*/
-import { getColor }  from '../config/color';
-import { getThemeType } from '../config/theme';
-import { 
+ */
+import {
+    getColor
+} from '../config/color';
+import {
+    getThemeType
+} from '../config/theme';
+import {
     PingFangSCRegular,
     robotoRegular
- } from '../config/labelStyle';
+} from '../config/labelStyle';
 
-export const lineBar = function(config){
-    const colorConfig = getColor( getThemeType( config ) );
+export const lineBar = function (config) {
+    const colorConfig = getColor(getThemeType(config));
     return {
-        grid : {
+        grid: {
             top: '50px',
             left: '5%',
             right: '5%',
             bottom: '5%',
             containLabel: true
         },
-        tooltip : {
+        tooltip: {
             show: true,
             trigger: 'axis'
         },
-        legend : {
+        legend: {
             type: 'scroll',
-            top : '10px',
+            top: '10px',
             itemHeight: 4,
             textStyle: {
                 padding: [0, 0, 2, 3],
                 color: colorConfig.LEGENDCOLOR,
-                fontFamily : PingFangSCRegular
+                fontFamily: PingFangSCRegular
             },
-            borderRadius : 4,
+            borderRadius: 4,
             data: []
         },
-        xAxis : {
+        xAxis: {
             type: 'category',
-            boundaryGap:true,
+            boundaryGap: true,
             axisLine: {
                 show: false,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
+                lineStyle: {
+                    color: colorConfig.AXISLINECOLOR
                 }
             },
             axisTick: {
@@ -49,28 +52,28 @@ export const lineBar = function(config){
             },
             splitLine: {
                 show: false,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
+                lineStyle: {
+                    color: colorConfig.AXISLINECOLOR
                 }
             },
             axisLabel: {
-                color : colorConfig.FONTCOLOR,
-                fontFamily : robotoRegular
+                color: colorConfig.FONTCOLOR,
+                fontFamily: robotoRegular
             }
         },
-        yAxis : {
+        yAxis: {
             type: 'value',
-            boundaryGap:["0","23%"],
+            boundaryGap: ["0", "23%"],
             axisLine: {
                 show: false,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
+                lineStyle: {
+                    color: colorConfig.AXISLINECOLOR
                 }
             },
-            splitLine : {
-                show : true,
-                lineStyle : {
-                    color : colorConfig.AXISLINECOLOR
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: colorConfig.AXISLINECOLOR
                 }
             },
             axisTick: {
@@ -78,7 +81,7 @@ export const lineBar = function(config){
             },
             axisLabel: {
                 color: colorConfig.FONTCOLOR,
-                fontFamily : robotoRegular
+                fontFamily: robotoRegular
             }
         }
     };

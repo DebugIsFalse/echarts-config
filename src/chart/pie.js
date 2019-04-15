@@ -1,20 +1,24 @@
 /*
  * 饼图
-*/
-import { getColor }  from '../config/color';
-import { getThemeType } from '../config/theme';
-import { 
+ */
+import {
+    getColor
+} from '../config/color';
+import {
+    getThemeType
+} from '../config/theme';
+import {
     PingFangSCRegular,
     robotoRegular
- } from '../config/labelStyle';
+} from '../config/labelStyle';
 
-export const Pie = function( config ){
-    const colorConfig = getColor( getThemeType( config ) );
+export const Pie = function (config) {
+    const colorConfig = getColor(getThemeType(config));
     return {
-        grid : {
+        grid: {
             show: false
         },
-        legend : {
+        legend: {
             right: '20px',
             top: 'middle',
             itemHeight: 10,
@@ -23,36 +27,36 @@ export const Pie = function( config ){
             textStyle: {
                 padding: [0, 0, 3, 3],
                 color: colorConfig.FONTCOLOR,
-                fontFamily : PingFangSCRegular
+                fontFamily: PingFangSCRegular
             },
             data: []
         },
-        tooltip : {
+        tooltip: {
             show: false,
             trigger: 'item'
         },
-        series : {
+        series: {
             type: 'pie',
-            center : ['40%','50%'],
+            center: ['40%', '50%'],
             radius: ['50%', '80%'],
-            hoverAnimation : false,
-            label : {
+            hoverAnimation: false,
+            label: {
                 normal: {
                     show: false,
-                    formatter : function(item){
+                    formatter: function (item) {
                         const it = item.data;
                         const unit = it.unit ? it.unit : '';
                         return it.name + '\n\n' + it.value + unit;
                     },
                     position: 'center'
-                    
+
                 },
                 emphasis: {
                     show: true,
                     textStyle: {
                         fontSize: '16',
                         fontWeight: 'bold',
-                        fontFamily : robotoRegular
+                        fontFamily: robotoRegular
                     }
                 }
             },

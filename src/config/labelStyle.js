@@ -1,4 +1,4 @@
-export const robotoRegular =  'Roboto-Regular';
+export const robotoRegular = 'Roboto-Regular';
 export const PingFangSCRegular = 'PingFangSC-Regular'
 export const HelveticaNeue = 'HelveticaNeue';
 

@@ -1,45 +1,51 @@
 /*
  * 矩形树图
-*/
-import { getColor }  from '../config/color';
-import { getThemeType } from '../config/theme';
-import { 
-    font12,font14,font16,font20,
+ */
+import {
+    getColor
+} from '../config/color';
+import {
+    getThemeType
+} from '../config/theme';
+import {
+    font12,
+    font14,
+    font16,
+    font20,
     robotoRegular,
     PingFangSCRegular
 } from '../config/labelStyle'
 
-export  const TreeMap = function( config ){
-    const colorConfig = getColor( getThemeType( config ) );
+export const TreeMap = function (config) {
+    const colorConfig = getColor(getThemeType(config));
     return {
-        series : {
+        series: {
             name: 'brand',
-            label : {
-                rich : {
-                    name : {
-                        color : "#fff",
-                        fontSize : font12,
-                        fontFamily : PingFangSCRegular
+            label: {
+                rich: {
+                    name: {
+                        color: "#fff",
+                        fontSize: font12,
+                        fontFamily: PingFangSCRegular
                     },
-                    des : {
-                        color : "#fff",
-                        height : 30,
-                        padding : [10,0,0,14],
-                        fontSize : font20,
-                        fontFamily : PingFangSCRegular
+                    des: {
+                        color: "#fff",
+                        height: 30,
+                        padding: [10, 0, 0, 14],
+                        fontSize: font20,
+                        fontFamily: PingFangSCRegular
                     }
                 }
             },
             type: 'treemap',
-            fontFamily : 'Roboto-Regular',
+            fontFamily: 'Roboto-Regular',
             leafDepth: 1,
             roam: false,
             width: '100%',
             height: '90%',
             top: 'top',
             data: [],
-            levels: [
-                {
+            levels: [{
                     color: colorConfig.COLORS
                 },
                 {
@@ -82,14 +88,14 @@ export  const TreeMap = function( config ){
             ],
             breadcrumb: {
                 height: 25,
-                bottom : 10,
+                bottom: 10,
                 itemStyle: {
                     normal: {
                         borderWidth: 0,
-                        color : colorConfig.TREEMAPBREADCOLOR
+                        color: colorConfig.TREEMAPBREADCOLOR
                     }
                 }
             }
         }
     }
-} 
+}

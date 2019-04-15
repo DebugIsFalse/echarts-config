@@ -1,62 +1,66 @@
 /*
  * 雷达图
-*/
-import { getColor}  from '../config/color';
-import { getThemeType } from '../config/theme';
-import { 
+ */
+import {
+    getColor
+} from '../config/color';
+import {
+    getThemeType
+} from '../config/theme';
+import {
     PingFangSCRegular,
     robotoRegular
- } from '../config/labelStyle';
+} from '../config/labelStyle';
 
-export const Radar = function( config ){
-    const colorConfig = getColor( getThemeType( config ) );
+export const Radar = function (config) {
+    const colorConfig = getColor(getThemeType(config));
     return {
-        grid : {
+        grid: {
             show: false,
         },
-        legend : {
+        legend: {
             itemHeight: 5,
             itemWidth: 20,
             orient: 'horizontal',
-            padding :[15,5],
+            padding: [15, 5],
             textStyle: {
                 padding: [0, 0, 3, 3],
                 color: colorConfig.LEGENDCOLOR,
-                fontFamily : PingFangSCRegular
+                fontFamily: PingFangSCRegular
             },
             data: []
         },
-        tooltip : {
+        tooltip: {
             show: false,
             trigger: 'axis'
         },
-        radar : {
-            radius : '65%',
+        radar: {
+            radius: '65%',
             center: ['50%', '53%'],
-            name : {
-                textStyle : {
-                    color : colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
+            name: {
+                textStyle: {
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily: robotoRegular
                 }
             },
-            splitArea : {
-                show : false
+            splitArea: {
+                show: false
             },
-            axisLine : {
+            axisLine: {
                 lineStyle: {
                     color: colorConfig.RADARAREACOLOR
                 }
             },
-            splitLine : {
-                show : true,
-                lineStyle : {
-                    color : colorConfig.RADARAREACOLOR
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: colorConfig.RADARAREACOLOR
                 }
             }
         },
-        series : {
+        series: {
             type: 'radar',
             data: []
         }
     };
-} 
+}
