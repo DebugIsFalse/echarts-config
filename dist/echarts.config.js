@@ -1,8 +1,8 @@
 var echartsConfig = (function (exports) {
     'use strict';
 
-    const COLORS = ['rgba(45,140,240,1)','rgba(0,210,179,1)','rgba(251,169,0,1)','rgba(242,112,54,1)','rgba(181,40,81,1)','rgba(45,51,138,1)', 'rgba(172,63,192,1)', 'rgba(102,58,183,1)','rgba(67,86,205,1)','rgba(16,157,88)','rgba(123,179,66,1)','rgba(191,197,33,1)'];
-    const FUNNELCOLORS = ['#E4F3FF','#68B8FF','#2E9AFF','#2A79DC','#2149AB'];
+    const COLORS = ['rgba(45,140,240,1)', 'rgba(0,210,179,1)', 'rgba(251,169,0,1)', 'rgba(242,112,54,1)', 'rgba(181,40,81,1)', 'rgba(45,51,138,1)', 'rgba(172,63,192,1)', 'rgba(102,58,183,1)', 'rgba(67,86,205,1)', 'rgba(16,157,88,1)', 'rgba(123,179,66,1)', 'rgba(191,197,33,1)'];
+    const FUNNELCOLORS = ['#E4F3FF', '#68B8FF', '#2E9AFF', '#2A79DC', '#2149AB'];
     const FUNNELFONTCOLOR = 'rgba(255,255,255,1)';
 
     const RADARAREACOLOR_DARK = 'rgba(255,255,255,.15)';
@@ -20,42 +20,42 @@ var echartsConfig = (function (exports) {
 
 
     const defaultsColor = {
-        dark : {
-            COLORS : COLORS,
-            FONTCOLOR : FONTCOLOR_DARK,
-            AXISLINECOLOR : AXISLINECOLOR_DARK,
-            RADARAREACOLOR : RADARAREACOLOR_DARK,
-            TREEMAPBREADCOLOR : TREEMAPBREADCOLOR_DARK,
-            FUNNELCOLORS : FUNNELCOLORS,
-            FUNNELFONTCOLOR : FUNNELFONTCOLOR,
+        dark: {
+            COLORS: COLORS,
+            FONTCOLOR: FONTCOLOR_DARK,
+            AXISLINECOLOR: AXISLINECOLOR_DARK,
+            RADARAREACOLOR: RADARAREACOLOR_DARK,
+            TREEMAPBREADCOLOR: TREEMAPBREADCOLOR_DARK,
+            FUNNELCOLORS: FUNNELCOLORS,
+            FUNNELFONTCOLOR: FUNNELFONTCOLOR,
             LEGENDCOLOR: LEGENDCOLOR_DARK
         },
-        light : {
-            COLORS : COLORS,
-            FONTCOLOR : FONTCOLOR_LIGHT,
-            AXISLINECOLOR : AXISLINECOLOR_LIGHT,
-            RADARAREACOLOR : RADARAREACOLOR_LIGHT,
-            TREEMAPBREADCOLOR : TREEMAPBREADCOLOR_LIGHT,
-            FUNNELCOLORS : FUNNELCOLORS,
-            FUNNELFONTCOLOR : FUNNELFONTCOLOR,
-            LEGENDCOLOR : LEGENDCOLOR_LIGHT
+        light: {
+            COLORS: COLORS,
+            FONTCOLOR: FONTCOLOR_LIGHT,
+            AXISLINECOLOR: AXISLINECOLOR_LIGHT,
+            RADARAREACOLOR: RADARAREACOLOR_LIGHT,
+            TREEMAPBREADCOLOR: TREEMAPBREADCOLOR_LIGHT,
+            FUNNELCOLORS: FUNNELCOLORS,
+            FUNNELFONTCOLOR: FUNNELFONTCOLOR,
+            LEGENDCOLOR: LEGENDCOLOR_LIGHT
         }
     };
 
-    const getColor = function(type){
+    const getColor = function (type) {
         return defaultsColor[type];
     };
 
-    const updateColor = function(theme,type,value){
+    const updateColor = function (theme, type, value) {
         defaultsColor[theme][type] = value;
     };
 
-    const types = ['dark','light'];
-    const getThemeType = function( config ){
-        return types.includes( config.themeType ) > 0 ? config.themeType : window._CHART_THEMETYPE_;
+    const types = ['dark', 'light'];
+    const getThemeType = function (config) {
+        return types.includes(config.themeType) > 0 ? config.themeType : window._CHART_THEMETYPE_;
     };
 
-    const robotoRegular =  'Roboto-Regular';
+    const robotoRegular = 'Roboto-Regular';
     const PingFangSCRegular = 'PingFangSC-Regular';
 
     const font12 = '12';
@@ -63,39 +63,43 @@ var echartsConfig = (function (exports) {
     const font16 = '16';
     const font20 = '20';
 
-    const lineBar = function(config){
-        const colorConfig = getColor( getThemeType( config ) );
+    /*
+     * 线图柱图
+     */
+
+    const lineBar = function (config) {
+        const colorConfig = getColor(getThemeType(config));
         return {
-            grid : {
+            grid: {
                 top: '50px',
                 left: '5%',
                 right: '5%',
                 bottom: '5%',
                 containLabel: true
             },
-            tooltip : {
+            tooltip: {
                 show: true,
                 trigger: 'axis'
             },
-            legend : {
+            legend: {
                 type: 'scroll',
-                top : '10px',
+                top: '10px',
                 itemHeight: 4,
                 textStyle: {
                     padding: [0, 0, 2, 3],
                     color: colorConfig.LEGENDCOLOR,
-                    fontFamily : PingFangSCRegular
+                    fontFamily: PingFangSCRegular
                 },
-                borderRadius : 4,
+                borderRadius: 4,
                 data: []
             },
-            xAxis : {
+            xAxis: {
                 type: 'category',
-                boundaryGap:true,
+                boundaryGap: true,
                 axisLine: {
                     show: false,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
+                    lineStyle: {
+                        color: colorConfig.AXISLINECOLOR
                     }
                 },
                 axisTick: {
@@ -103,28 +107,28 @@ var echartsConfig = (function (exports) {
                 },
                 splitLine: {
                     show: false,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
+                    lineStyle: {
+                        color: colorConfig.AXISLINECOLOR
                     }
                 },
                 axisLabel: {
-                    color : colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily: robotoRegular
                 }
             },
-            yAxis : {
+            yAxis: {
                 type: 'value',
-                boundaryGap:["0","23%"],
+                boundaryGap: ["0", "23%"],
                 axisLine: {
                     show: false,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
+                    lineStyle: {
+                        color: colorConfig.AXISLINECOLOR
                     }
                 },
-                splitLine : {
-                    show : true,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: colorConfig.AXISLINECOLOR
                     }
                 },
                 axisTick: {
@@ -132,7 +136,7 @@ var echartsConfig = (function (exports) {
                 },
                 axisLabel: {
                     color: colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
+                    fontFamily: robotoRegular
                 }
             }
         };
@@ -140,15 +144,15 @@ var echartsConfig = (function (exports) {
 
     /*
      * 饼图
-    */
+     */
 
-    const Pie = function( config ){
-        const colorConfig = getColor( getThemeType( config ) );
+    const Pie = function (config) {
+        const colorConfig = getColor(getThemeType(config));
         return {
-            grid : {
+            grid: {
                 show: false
             },
-            legend : {
+            legend: {
                 right: '20px',
                 top: 'middle',
                 itemHeight: 10,
@@ -157,36 +161,36 @@ var echartsConfig = (function (exports) {
                 textStyle: {
                     padding: [0, 0, 3, 3],
                     color: colorConfig.FONTCOLOR,
-                    fontFamily : PingFangSCRegular
+                    fontFamily: PingFangSCRegular
                 },
                 data: []
             },
-            tooltip : {
+            tooltip: {
                 show: false,
                 trigger: 'item'
             },
-            series : {
+            series: {
                 type: 'pie',
-                center : ['40%','50%'],
+                center: ['40%', '50%'],
                 radius: ['50%', '80%'],
-                hoverAnimation : false,
-                label : {
+                hoverAnimation: false,
+                label: {
                     normal: {
                         show: false,
-                        formatter : function(item){
+                        formatter: function (item) {
                             const it = item.data;
                             const unit = it.unit ? it.unit : '';
                             return it.name + '\n\n' + it.value + unit;
                         },
                         position: 'center'
-                        
+
                     },
                     emphasis: {
                         show: true,
                         textStyle: {
                             fontSize: '16',
                             fontWeight: 'bold',
-                            fontFamily : robotoRegular
+                            fontFamily: robotoRegular
                         }
                     }
                 },
@@ -198,55 +202,55 @@ var echartsConfig = (function (exports) {
 
     /*
      * 雷达图
-    */
+     */
 
-    const Radar = function( config ){
-        const colorConfig = getColor( getThemeType( config ) );
+    const Radar = function (config) {
+        const colorConfig = getColor(getThemeType(config));
         return {
-            grid : {
+            grid: {
                 show: false,
             },
-            legend : {
+            legend: {
                 itemHeight: 5,
                 itemWidth: 20,
                 orient: 'horizontal',
-                padding :[15,5],
+                padding: [15, 5],
                 textStyle: {
                     padding: [0, 0, 3, 3],
                     color: colorConfig.LEGENDCOLOR,
-                    fontFamily : PingFangSCRegular
+                    fontFamily: PingFangSCRegular
                 },
                 data: []
             },
-            tooltip : {
+            tooltip: {
                 show: false,
                 trigger: 'axis'
             },
-            radar : {
-                radius : '65%',
+            radar: {
+                radius: '65%',
                 center: ['50%', '53%'],
-                name : {
-                    textStyle : {
-                        color : colorConfig.FONTCOLOR,
-                        fontFamily : robotoRegular
+                name: {
+                    textStyle: {
+                        color: colorConfig.FONTCOLOR,
+                        fontFamily: robotoRegular
                     }
                 },
-                splitArea : {
-                    show : false
+                splitArea: {
+                    show: false
                 },
-                axisLine : {
+                axisLine: {
                     lineStyle: {
                         color: colorConfig.RADARAREACOLOR
                     }
                 },
-                splitLine : {
-                    show : true,
-                    lineStyle : {
-                        color : colorConfig.RADARAREACOLOR
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: colorConfig.RADARAREACOLOR
                     }
                 }
             },
-            series : {
+            series: {
                 type: 'radar',
                 data: []
             }
@@ -255,37 +259,37 @@ var echartsConfig = (function (exports) {
 
     /*
      * 散点图
-    */
+     */
 
-    const Scatter = function( config ){
-        const colorConfig = getColor( getThemeType( config ) );
+    const Scatter = function (config) {
+        const colorConfig = getColor(getThemeType(config));
         return {
-            legend : {
+            legend: {
                 itemHeight: 10,
                 itemWidth: 10,
                 orient: 'horizontal',
-                padding :[10,5],
+                padding: [10, 5],
                 textStyle: {
                     padding: [0, 0, 3, 3],
-                    fontFamily : PingFangSCRegular,
+                    fontFamily: PingFangSCRegular,
                     color: colorConfig.FONTCOLOR
                 },
                 data: []
             },
-            tooltip : {
+            tooltip: {
                 show: true,
                 trigger: 'axis'
             },
-            series : {
+            series: {
                 type: 'scatter',
                 data: []
             },
-            xAxis : {
-                boundaryGap:["0","23%"],
+            xAxis: {
+                boundaryGap: ["0", "23%"],
                 axisLine: {
                     show: true,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
+                    lineStyle: {
+                        color: colorConfig.AXISLINECOLOR
                     }
                 },
                 axisTick: {
@@ -295,27 +299,27 @@ var echartsConfig = (function (exports) {
                     show: false,
                 },
                 axisLabel: {
-                    color : colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily: robotoRegular
                 }
             },
-            yAxis : {
-                boundaryGap:["0","23%"],
+            yAxis: {
+                boundaryGap: ["0", "23%"],
                 axisLine: {
                     show: true,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
+                    lineStyle: {
+                        color: colorConfig.AXISLINECOLOR
                     }
                 },
-                splitLine : {
-                    show : false
+                splitLine: {
+                    show: false
                 },
                 axisTick: {
                     show: false
                 },
                 axisLabel: {
                     color: colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
+                    fontFamily: robotoRegular
                 }
             }
         };
@@ -323,39 +327,38 @@ var echartsConfig = (function (exports) {
 
     /*
      * 矩形树图
-    */
+     */
 
-    const TreeMap = function( config ){
-        const colorConfig = getColor( getThemeType( config ) );
+    const TreeMap = function (config) {
+        const colorConfig = getColor(getThemeType(config));
         return {
-            series : {
+            series: {
                 name: 'brand',
-                label : {
-                    rich : {
-                        name : {
-                            color : "#fff",
-                            fontSize : font12,
-                            fontFamily : PingFangSCRegular
+                label: {
+                    rich: {
+                        name: {
+                            color: "#fff",
+                            fontSize: font12,
+                            fontFamily: PingFangSCRegular
                         },
-                        des : {
-                            color : "#fff",
-                            height : 30,
-                            padding : [10,0,0,14],
-                            fontSize : font20,
-                            fontFamily : PingFangSCRegular
+                        des: {
+                            color: "#fff",
+                            height: 30,
+                            padding: [10, 0, 0, 14],
+                            fontSize: font20,
+                            fontFamily: PingFangSCRegular
                         }
                     }
                 },
                 type: 'treemap',
-                fontFamily : 'Roboto-Regular',
+                fontFamily: 'Roboto-Regular',
                 leafDepth: 1,
                 roam: false,
                 width: '100%',
                 height: '90%',
                 top: 'top',
                 data: [],
-                levels: [
-                    {
+                levels: [{
                         color: colorConfig.COLORS
                     },
                     {
@@ -398,11 +401,11 @@ var echartsConfig = (function (exports) {
                 ],
                 breadcrumb: {
                     height: 25,
-                    bottom : 10,
+                    bottom: 10,
                     itemStyle: {
                         normal: {
                             borderWidth: 0,
-                            color : colorConfig.TREEMAPBREADCOLOR
+                            color: colorConfig.TREEMAPBREADCOLOR
                         }
                     }
                 }
@@ -412,18 +415,18 @@ var echartsConfig = (function (exports) {
 
     /*
      * 堆积图
-    */
+     */
 
-    const Funnel = function(config){
-        const colorConfig = getColor( getThemeType( config ) );
+    const Funnel = function (config) {
+        const colorConfig = getColor(getThemeType(config));
         return {
             tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c}"
             },
-            series : {
-                name:'漏斗图',
-                type:'funnel',
+            series: {
+                name: '漏斗图',
+                type: 'funnel',
                 left: '10%',
                 top: 20,
                 bottom: 20,
@@ -436,21 +439,21 @@ var echartsConfig = (function (exports) {
                 label: {
                     show: true,
                     position: 'inside',
-                    textBorderColor : "rgba(0,0,0,.8)",
-                    textShadowOffsetX : 3,
-                    textShadowOffsetY : 8,
-                    color : colorConfig.FUNNELFONTCOLOR
+                    textBorderColor: "rgba(0,0,0,.8)",
+                    textShadowOffsetX: 3,
+                    textShadowOffsetY: 8,
+                    color: colorConfig.FUNNELFONTCOLOR
                 },
                 labelLine: {
                     length: 30,
                     lineStyle: {
                         width: 1,
                         type: 'solid',
-                        color : colorConfig.RADARAREACOLOR
+                        color: colorConfig.RADARAREACOLOR
                     }
                 },
                 itemStyle: {
-                    borderWidth : 0
+                    borderWidth: 0
                 }
             }
         }
@@ -567,8 +570,8 @@ var echartsConfig = (function (exports) {
     })));
     });
 
-    const isArray = function( data ){
-        return Array.isArray( data );
+    const isArray = function (data) {
+        return Array.isArray(data);
     };
 
     const typeOf = function (obj) {
@@ -622,47 +625,47 @@ var echartsConfig = (function (exports) {
 
     /*
      * 堆积图
-    */
+     */
 
     const itemStyle = {
         normal: {
             opacity: 1,
-            borderWidth : 1,
-            borderType : 'solid',
+            borderWidth: 1,
+            borderType: 'solid',
             shadowColor: 'rgba(0, 0, 0, 0.5)'
         }
     };
-    const Bubble = function( config ){
-        const colorConfig = getColor( getThemeType( config ) );
+    const Bubble = function (config) {
+        const colorConfig = getColor(getThemeType(config));
 
         return {
-            legend : {
+            legend: {
                 itemHeight: 10,
                 itemWidth: 10,
                 orient: 'horizontal',
-                padding :[10,5],
+                padding: [10, 5],
                 textStyle: {
                     padding: [0, 0, 3, 3],
-                    fontFamily : PingFangSCRegular,
+                    fontFamily: PingFangSCRegular,
                     color: colorConfig.FONTCOLOR
                 },
                 data: []
             },
-            tooltip : {
+            tooltip: {
                 show: true,
                 trigger: 'axis'
             },
-            series : {
+            series: {
                 type: 'scatter',
-                itemStyle: deepCopy( itemStyle ),
+                itemStyle: deepCopy(itemStyle),
                 data: []
             },
-            xAxis : {
-                boundaryGap:["0","23%"],
+            xAxis: {
+                boundaryGap: ["0", "23%"],
                 axisLine: {
                     show: true,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
+                    lineStyle: {
+                        color: colorConfig.AXISLINECOLOR
                     }
                 },
                 axisTick: {
@@ -672,36 +675,36 @@ var echartsConfig = (function (exports) {
                     show: false,
                 },
                 axisLabel: {
-                    color : colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
+                    color: colorConfig.FONTCOLOR,
+                    fontFamily: robotoRegular
                 }
             },
-            yAxis : {
-                boundaryGap:["0","23%"],
+            yAxis: {
+                boundaryGap: ["0", "23%"],
                 axisLine: {
                     show: true,
-                    lineStyle : {
-                        color : colorConfig.AXISLINECOLOR
+                    lineStyle: {
+                        color: colorConfig.AXISLINECOLOR
                     }
                 },
-                splitLine : {
-                    show : false
+                splitLine: {
+                    show: false
                 },
                 axisTick: {
                     show: false
                 },
                 axisLabel: {
                     color: colorConfig.FONTCOLOR,
-                    fontFamily : robotoRegular
+                    fontFamily: robotoRegular
                 }
             },
-            visualMap : {
+            visualMap: {
                 top: '10%',
                 dimension: 2,
-                show : false,
-                pieces : [],
+                show: false,
+                pieces: [],
                 inRange: {
-                    symbolSize: [10,60]
+                    symbolSize: [10, 60]
                 }
             }
         }
@@ -726,42 +729,42 @@ var echartsConfig = (function (exports) {
         return legend;
     };
 
-    const updateTransverse = function(config){
+    const updateTransverse = function (config) {
         config.yAxis.type = "category";
         config.xAxis.type = "value";
         config.yAxis.splitLine.show = false;
         config.xAxis.splitLine.show = true;
         config.yAxis.axisLabel.fontSize = font14;
-        config.yAxis.axisLabel.color = getColor( getThemeType(config) ).FONTCOLOR;
+        config.yAxis.axisLabel.color = getColor(getThemeType(config)).FONTCOLOR;
     };
 
-    const updatePieConfig = function(config,returnConfig){
+    const updatePieConfig = function (config, returnConfig) {
         let isHide = false;
-        if( isArray( config.series ) && config.series[0].radius && config.series[0].radius[0] === '0' ){
+        if (isArray(config.series) && config.series[0].radius && config.series[0].radius[0] === '0') {
             isHide = true;
-        }else if( Object.keys( config.series ).length > 0 && config.series.radius &&  config.series.radius[0] === '0' ){
+        } else if (Object.keys(config.series).length > 0 && config.series.radius && config.series.radius[0] === '0') {
             isHide = true;
         }
-        if( isHide ){
+        if (isHide) {
             returnConfig.series.label.emphasis.show = false;
             returnConfig.tooltip.show = true;
         }
     };
 
-    const updateBubbleColor = function( config,index ){
+    const updateBubbleColor = function (config, index) {
         const reg = /\,1\)/g;
         const color = COLORS[index];
-        const color25 = color.replace(reg,',.25)');
+        const color25 = color.replace(reg, ',.25)');
         config.itemStyle = config.itemStyle || {};
-        config.itemStyle.normal= config.itemStyle.normal || {};
+        config.itemStyle.normal = config.itemStyle.normal || {};
         config.itemStyle.normal.color = color25;
         config.itemStyle.normal.borderColor = color;
     };
 
     const chartUtil = {
         //气泡图分段处理
-        bubbleLayered( data,options = {} ){
-            if( !options.size ){
+        bubbleLayered(data, options = {}) {
+            if (!options.size) {
                 return;
             }
         }
