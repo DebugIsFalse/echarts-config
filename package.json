@@ -1,5 +1,5 @@
 {
-    "name": "echarts-config2",
+    "name": "echarts-config",
     "version": "0.1.5",
     "description": "talkingdata echart config",
     "main": "./dist/echarts.config.umd.js",
