@@ -3,8 +3,8 @@ description: Report a bug to echarts-config1
 title: "[Bug] "
 labels: [bug]
 body:
-- type: markdown1
-  attribute:
+- type: markdown
+  attributes:
     value: |
       The issue list is reserved exclusively for bug reports and feature requests.
 
