@@ -10,3 +10,4 @@ body:
       options:
       - label: I have searched the existing issues
         required: true
+      - label: I have searched the existing issues2
