@@ -9,5 +9,5 @@ body:
       description: Please search to see if an issue already exists for the bug you encountered.
       options:
       - label: I have searched the existing issues
-        required: true
+        required: 111
       - label: I have searched the existing issues2
