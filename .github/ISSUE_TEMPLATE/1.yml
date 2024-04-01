@@ -8,11 +8,11 @@ body:
       description: >
         Please confirm the following:
       options:
-        - label: 1
+        - label: "1"
           required: false
-        - label: 2
+        - label: "2"
           required: false
-        - label: 3
+        - label: "3"
           required: false
-        - label: 4
+        - label: "4"
           required: true
